@@ -67,7 +67,17 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10">
-          {/* Projects dropdown — first item, click to toggle */}
+          {links.map((link) => (
+            <button
+              key={link.section}
+              onClick={() => scrollToSection(link.section)}
+              className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer"
+            >
+              {link.label}
+            </button>
+          ))}
+
+          {/* Projects dropdown — rightmost before Book a Call */}
           <div className="relative">
             <button
               onClick={() => setProjectsOpen(!projectsOpen)}
@@ -77,7 +87,7 @@ export default function Navbar() {
               <svg className={`w-3 h-3 mt-0.5 transition-transform ${projectsOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
             </button>
             {projectsOpen && (
-              <div className="absolute top-full left-0 pt-2">
+              <div className="absolute top-full right-0 pt-2">
                 <div className="bg-navy border border-white/10 shadow-xl min-w-[180px]">
                   {projectLinks.map((pl) => (
                     <button
@@ -92,16 +102,6 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
-          {links.map((link) => (
-            <button
-              key={link.section}
-              onClick={() => scrollToSection(link.section)}
-              className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer"
-            >
-              {link.label}
-            </button>
-          ))}
           <button
             onClick={() => scrollToSection('contact')}
             className="ml-4 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
