@@ -12,6 +12,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // GitHub Pages SPA: restore path from 404.html redirect
+      (function() {
+        var q = window.location.search;
+        var p = new URLSearchParams(q).get('p');
+        if (p) {
+          window.history.replaceState(null, '', p);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
