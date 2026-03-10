@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/energy" element={<Energy />} />
+          <Route path="/projects/energy" element={<Energy />} />
         </Routes>
         <Footer />
       </div>
