@@ -11,8 +11,8 @@ const guyCredentials = [
 
 const dannyCredentials = [
   { label: 'Years of Experience', value: '20+' },
-  { label: 'Markets Entered', value: '15+' },
-  { label: 'Deals Closed', value: '50+' },
+  { label: 'Integrations & Automations', value: '200+' },
+  { label: 'Systems Implemented & Architected', value: '500+' },
 ]
 
 function PersonCard({ photo, altText, name, title, bio, credentials, reverse, delay }) {
