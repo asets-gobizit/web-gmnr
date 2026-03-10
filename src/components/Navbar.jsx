@@ -18,6 +18,7 @@ const projectLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [projectsOpen, setProjectsOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const isHome = location.pathname === '/'
@@ -66,25 +67,30 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10">
-          {/* Projects dropdown — first item */}
-          <div className="relative group">
-            <button className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer flex items-center gap-1">
+          {/* Projects dropdown — first item, click to toggle */}
+          <div className="relative">
+            <button
+              onClick={() => setProjectsOpen(!projectsOpen)}
+              className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer flex items-center gap-1"
+            >
               Projects
-              <svg className="w-3 h-3 mt-0.5 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              <svg className={`w-3 h-3 mt-0.5 transition-transform ${projectsOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <div className="bg-navy border border-white/10 shadow-xl min-w-[180px]">
-                {projectLinks.map((pl) => (
-                  <button
-                    key={pl.route}
-                    onClick={() => navigate(pl.route)}
-                    className="block w-full text-left px-5 py-3 text-white/70 text-sm tracking-widest uppercase hover:text-gold hover:bg-white/5 transition-colors duration-200 cursor-pointer"
-                  >
-                    {pl.label}
-                  </button>
-                ))}
+            {projectsOpen && (
+              <div className="absolute top-full left-0 pt-2">
+                <div className="bg-navy border border-white/10 shadow-xl min-w-[180px]">
+                  {projectLinks.map((pl) => (
+                    <button
+                      key={pl.route}
+                      onClick={() => { navigate(pl.route); setProjectsOpen(false) }}
+                      className="block w-full text-left px-5 py-3 text-white/70 text-sm tracking-widest uppercase hover:text-gold hover:bg-white/5 transition-colors duration-200 cursor-pointer"
+                    >
+                      {pl.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {links.map((link) => (
