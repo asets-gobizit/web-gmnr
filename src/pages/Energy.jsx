@@ -30,9 +30,7 @@ export default function Energy() {
     <div className="bg-cream min-h-screen">
       {/* Hero */}
       <section className="relative bg-navy pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-navy opacity-90" />
-        {/* Dot pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -48,46 +46,46 @@ export default function Energy() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-              Energy &amp; Carbon Markets
+              Carbon &amp; European Energy Markets
             </p>
             <h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-4xl"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
-              The Carbon Cost Challenge Reshaping European Energy
+              Carbon Is Now a Balance Sheet Item
             </h1>
             <p className="mt-8 text-white/60 text-lg md:text-xl max-w-3xl leading-relaxed">
-              The EU Emissions Trading System has transformed carbon emissions into a tradable financial liability embedded within the European energy system. For companies across the energy value chain, this creates a growing and complex cost variable that demands strategic attention.
+              The EU Emissions Trading System covers approximately 11,000 installations across the EU, Norway, Iceland, and Liechtenstein. It has turned carbon emissions into a tradable financial liability — one that now sits at the centre of energy procurement, asset valuation, and long-term competitiveness for companies operating in Europe.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Introduction */}
+      {/* The Core Mechanism */}
       <Section className="py-20 md:py-28 bg-cream">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div>
               <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-                The Regulatory Landscape
+                The Core Mechanism
               </p>
               <h2
                 className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
                 style={{ fontFamily: 'var(--font-serif)' }}
               >
-                A Financial and Regulatory Challenge at Scale
+                How the EU ETS Creates Cost Exposure
               </h2>
               <p className="text-navy/70 text-lg leading-relaxed mb-6">
-                The European energy and industrial sectors are facing a growing financial and regulatory challenge driven by the EU Emissions Trading System (EU ETS).
+                Under the EU ETS, companies must purchase and surrender EU Allowances (EUAs) to cover their verified annual emissions. Each allowance represents one tonne of CO₂. Failure to surrender results in financial penalties and reputational risk.
               </p>
               <p className="text-navy/70 text-lg leading-relaxed">
-                Under EU ETS, companies must purchase and surrender EU Allowances (EUAs) for their verified carbon emissions. Carbon has become a major operating cost variable for many organisations.
+                EUAs are traded as a market commodity — on exchanges such as EEX and ICE, as well as over-the-counter. This means carbon is no longer a regulatory formality. It is a cost line subject to the same forces as any other traded commodity: supply constraints, policy shifts, and speculative activity.
               </p>
             </div>
             <div className="flex justify-center">
               <img
                 src={ets2Image}
-                alt="EU Emissions Trading System — carbon market dynamics"
+                alt="EU ETS2 regulatory timeline — DG CLIMA framework"
                 className="w-full max-w-md rounded shadow-lg"
               />
             </div>
@@ -95,62 +93,68 @@ export default function Energy() {
         </div>
       </Section>
 
-      {/* Rising Carbon Prices */}
+      {/* Price Volatility */}
       <Section className="py-20 md:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Market Dynamics
+            Market Volatility
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
+            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-6"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Rising Carbon Prices
+            Carbon Prices Are Volatile — and Structurally Rising
           </h2>
-          <p className="text-navy/70 text-lg leading-relaxed mb-8 max-w-3xl">
-            EU carbon allowances are traded as a market commodity. Prices are influenced by multiple intersecting forces, creating volatility that directly impacts operating costs for emissions-intensive industries.
+          <p className="text-navy/70 text-lg leading-relaxed mb-4 max-w-3xl">
+            EUA prices have ranged from under €20 to over €100 within the current trading phase. This volatility is driven by forces that are difficult to predict and impossible to control at the individual company level.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="text-navy/70 text-lg leading-relaxed mb-10 max-w-3xl">
+            For emissions-intensive businesses, unmanaged carbon price exposure can create significant P&L uncertainty — turning a stable operating quarter into a loss-making one on the back of a single regulatory announcement.
+          </p>
+          <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-5">
+            Key Price Drivers
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              'EU climate policy',
-              'Energy market conditions',
-              'Regulatory supply adjustments',
-              'Geopolitical events',
-              'Financial trading activity',
+              { title: 'EU Climate Policy', desc: 'Tightening emissions caps and accelerated reduction targets under Fit for 55' },
+              { title: 'Energy Market Conditions', desc: 'Gas and power price movements that shift the fuel switching economics' },
+              { title: 'Regulatory Supply Adjustments', desc: 'Market Stability Reserve interventions that withdraw surplus allowances' },
+              { title: 'Geopolitical Events', desc: 'Conflict, trade disruption, and sanctions that reshape energy flows' },
+              { title: 'Financial Trading Activity', desc: 'Institutional investors and hedge funds participating in carbon futures' },
             ].map((item, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-4 p-6 bg-cream border border-warm-gray"
-              >
-                <span className="text-gold text-lg mt-0.5">&#9670;</span>
-                <span className="text-navy/80 text-base font-medium">{item}</span>
+              <div key={i} className="p-6 bg-cream border border-warm-gray">
+                <p className="text-navy font-semibold text-sm mb-2">{item.title}</p>
+                <p className="text-navy/60 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </Section>
 
-      {/* Declining Free Allocation */}
+      {/* ETS1 — Declining Free Allocation */}
       <Section className="py-20 md:py-28 bg-navy">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Phase IV (2021–2030)
+            ETS1 — Phase IV (2021–2030)
           </p>
           <h2
             className="text-3xl md:text-4xl font-bold text-white leading-tight mb-8"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Declining Free Allocation for Industry
+            Free Allocation Is Disappearing
           </h2>
           <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
-            Many heavy industries historically received free carbon allowances. However, under EU ETS Phase IV these allocations are gradually declining. By 2034, many sectors will face significantly greater exposure to market-priced allowances.
+            Heavy industry has historically received free carbon allowances to protect against carbon leakage — the risk that production moves outside Europe to avoid emissions costs. Under EU ETS Phase IV, these free allocations are being progressively reduced.
           </p>
-          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-3xl">
-            Even if emissions remain constant, companies must increasingly purchase allowances on the open market each year.
+          <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
+            By 2034, free allocation for many sectors will be substantially eliminated, coinciding with the full implementation of the Carbon Border Adjustment Mechanism (CBAM). The result: even companies with flat or declining emissions face a growing annual procurement burden on the open market.
+          </p>
+          <p className="text-white/60 text-lg leading-relaxed mb-12 max-w-3xl">
+            This is not a future scenario. The reduction is already underway, and the gap between free allocation and actual emissions widens every compliance year.
           </p>
 
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Industries Affected
+            Industries Facing Allocation Decline
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {['Steel', 'Cement', 'Refining', 'Chemicals', 'Glass', 'Paper', 'Metals'].map(
@@ -167,35 +171,38 @@ export default function Energy() {
         </div>
       </Section>
 
-      {/* Expanding Carbon Market */}
+      {/* Expansion to New Sectors */}
       <Section className="py-20 md:py-28 bg-cream">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Expanding Scope
+            Widening Scope
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
+            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-6"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Expansion of the Carbon Market to New Sectors
+            New Sectors, New Obligations
           </h2>
+          <p className="text-navy/70 text-lg leading-relaxed mb-4 max-w-3xl">
+            The EU ETS is no longer confined to power stations and heavy industry. Recent legislative expansions have brought maritime shipping and intra-EEA aviation into the system, with maritime obligations phased in from 2024.
+          </p>
           <p className="text-navy/70 text-lg leading-relaxed mb-10 max-w-3xl">
-            The EU ETS is expanding beyond traditional heavy industry. New sectors are now entering the system, many of which have limited internal experience managing carbon market exposure.
+            Many of these newly obligated sectors have no prior experience with carbon allowance procurement, exchange-traded instruments, or emissions verification cycles. They are entering a complex, fast-moving market without the internal infrastructure to manage it.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              'Maritime shipping',
-              'Aviation',
-              'Fuel suppliers',
-              'Road transport fuels',
-              'Building heating fuels',
-            ].map((sector, i) => (
+              { sector: 'Maritime Shipping', detail: 'Phased obligation from 2024 — covering 40%, 70%, then 100% of verified emissions' },
+              { sector: 'Aviation (Intra-EEA)', detail: 'Already obligated under ETS1 — free allocation declining annually' },
+              { sector: 'Fuel Suppliers', detail: 'Entering under ETS2 as upstream regulated entities from 2027' },
+              { sector: 'Road Transport Fuels', detail: 'Covered under ETS2 — obligation falls on distributors, not consumers' },
+              { sector: 'Building Heating Fuels', detail: 'Natural gas and heating oil suppliers face new surrender requirements' },
+            ].map((item, i) => (
               <div
                 key={i}
                 className="p-8 bg-white border border-warm-gray hover:border-gold/30 transition-colors duration-300"
               >
-                <span className="text-gold text-2xl block mb-3">&#9670;</span>
-                <span className="text-navy font-semibold text-base">{sector}</span>
+                <p className="text-navy font-semibold text-base mb-2">{item.sector}</p>
+                <p className="text-navy/60 text-sm leading-relaxed">{item.detail}</p>
               </div>
             ))}
           </div>
@@ -206,43 +213,50 @@ export default function Energy() {
       <Section className="py-20 md:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            New Regulation
+            ETS2 — The Second System
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
+            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-6"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Introduction of ETS2
+            A New Carbon Market Is Already Live
           </h2>
+          <p className="text-navy/70 text-lg leading-relaxed mb-4 max-w-3xl">
+            ETS2 is a separate emissions trading system targeting fuel combustion in buildings, road transport, and small industrial installations. Unlike ETS1, the obligation falls upstream — on fuel suppliers and distributors, not end consumers.
+          </p>
+          <p className="text-navy/70 text-lg leading-relaxed mb-4 max-w-3xl">
+            Monitoring and reporting requirements are already in effect. The first allowance surrender is due May 2028, covering 2027 emissions. All ETS2 allowances will be fully auctioned — there is no free allocation.
+          </p>
           <p className="text-navy/70 text-lg leading-relaxed mb-12 max-w-3xl">
-            The EU is launching a new emissions trading system known as ETS2. This creates a new carbon cost layer across the European energy system, primarily affecting fuel suppliers.
+            For fuel distributors who have never operated in a carbon market, ETS2 introduces immediate complexity: scope factor calculations, biomethane blending rules, multi-jurisdiction reporting, and allowance procurement via exchange or OTC channels.
           </p>
 
           {/* Timeline */}
           <div className="grid md:grid-cols-3 gap-8 mb-14">
             {[
-              { year: '2025', milestone: 'Emissions monitoring begins' },
-              { year: '2026', milestone: 'Emissions verification begins' },
-              { year: '2028', milestone: 'First allowance surrender' },
+              { year: '2025', milestone: 'Emissions monitoring and reporting begins', status: 'LIVE' },
+              { year: '2026', milestone: 'Third-party emissions verification begins', status: 'UPCOMING' },
+              { year: '2028', milestone: 'First allowance surrender — May 2028 for 2027 emissions', status: 'DEADLINE' },
             ].map((item, i) => (
               <div key={i} className="relative p-8 bg-navy text-center">
+                <p className="text-gold/40 text-[10px] tracking-[0.3em] uppercase mb-2">{item.status}</p>
                 <p className="text-gold text-3xl font-bold mb-3" style={{ fontFamily: 'var(--font-serif)' }}>
                   {item.year}
                 </p>
-                <p className="text-white/70 text-sm tracking-wide">{item.milestone}</p>
+                <p className="text-white/70 text-sm leading-relaxed">{item.milestone}</p>
               </div>
             ))}
           </div>
 
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Entities Subject to ETS2
+            Directly Obligated Entities Under ETS2
           </p>
           <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
             {[
               'Natural gas distributors',
-              'Heating fuel suppliers',
+              'Heating oil suppliers',
               'Petrol and diesel distributors',
-              'Fuel retailers',
+              'Fuel retailers and wholesalers',
             ].map((entity, i) => (
               <div
                 key={i}
@@ -253,36 +267,38 @@ export default function Energy() {
               </div>
             ))}
           </div>
-          <p className="text-navy/70 text-lg leading-relaxed mt-8 max-w-3xl">
-            These entities will be required to purchase allowances covering the emissions generated by the fuels they sell.
-          </p>
         </div>
       </Section>
 
-      {/* Indirect Carbon Cost Exposure */}
+      {/* Indirect Exposure */}
       <Section className="py-20 md:py-28 bg-navy">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            Broader Impact
+            Beyond Direct Obligations
           </p>
           <h2
             className="text-3xl md:text-4xl font-bold text-white leading-tight mb-8"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Indirect Carbon Cost Exposure
+            Carbon Costs Propagate Through the Entire Energy System
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-3xl">
-            Even companies not directly obligated under ETS may face significant impacts. Carbon has become a structural variable across the entire energy market.
+          <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
+            Companies that are not directly obligated under either ETS1 or ETS2 are not insulated from carbon costs. The price of carbon is now embedded in the marginal cost of electricity generation, wholesale gas pricing, and long-term power purchase agreements.
           </p>
-          <p className="text-white/50 text-sm font-semibold tracking-[0.2em] uppercase mb-6">
-            Carbon prices influence
+          <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
+            Under ETS2, fuel suppliers will pass through allowance costs to downstream customers — small industrial operators, building managers, and fleet operators will all see carbon embedded in their energy bills. This creates a new layer of cost exposure for businesses that may have no awareness of the EU ETS at all.
+          </p>
+          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-3xl">
+            Carbon is no longer a niche compliance issue. It is a structural variable in European energy pricing.
           </p>
           <div className="grid sm:grid-cols-2 gap-4 max-w-3xl">
             {[
-              'Electricity market pricing',
-              'Gas-fired generation costs',
-              'Wholesale power market volatility',
-              'Long-term energy procurement strategies',
+              'Electricity market clearing prices',
+              'Gas-fired generation cost stacking',
+              'Wholesale power forward curves',
+              'PPA and long-term procurement pricing',
+              'Asset valuation and investment returns',
+              'Cross-border competitiveness',
             ].map((impact, i) => (
               <div
                 key={i}
@@ -303,28 +319,29 @@ export default function Energy() {
             The Management Challenge
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
+            className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-6"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Operational Complexity
+            Carbon Compliance Is Operationally Complex
           </h2>
+          <p className="text-navy/70 text-lg leading-relaxed mb-4 max-w-3xl">
+            Managing carbon exposure is not simply a matter of buying allowances once a year. It requires ongoing monitoring of price movements, regulatory changes, and cross-commodity positions. Allowance procurement must be timed against market conditions. Surrender deadlines are fixed and non-negotiable. Reporting requirements are audited externally.
+          </p>
           <p className="text-navy/70 text-lg leading-relaxed mb-10 max-w-3xl">
-            Managing carbon exposure requires companies to monitor multiple interconnected variables. For organisations without dedicated carbon market expertise, the system introduces significant financial and operational complexity.
+            For companies managing both power and carbon — particularly gas-fired generators, refineries, and integrated utilities — the interaction between energy trading positions and carbon liability creates a multi-layered risk management challenge that spans procurement, finance, and regulatory compliance simultaneously.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              'Allowance procurement',
-              'Price volatility',
-              'Regulatory reporting',
-              'Surrender deadlines',
-              'Cross-commodity exposure (power, gas, carbon)',
+              { title: 'Allowance Procurement', desc: 'Timing purchases across spot, futures, and OTC to optimise cost' },
+              { title: 'Price Risk Management', desc: 'Hedging exposure against volatile forward curves' },
+              { title: 'Regulatory Reporting', desc: 'Annual verification, registry management, and audit readiness' },
+              { title: 'Surrender Deadlines', desc: 'Fixed annual compliance dates with financial penalties for non-delivery' },
+              { title: 'Cross-Commodity Exposure', desc: 'Correlated risk across power, gas, and carbon positions' },
+              { title: 'Multi-Jurisdiction Operations', desc: 'EU ETS, UK ETS, and potential linkage complexities for international operators' },
             ].map((item, i) => (
-              <div
-                key={i}
-                className="p-6 bg-white border border-warm-gray"
-              >
-                <span className="text-gold text-lg block mb-2">&#9670;</span>
-                <span className="text-navy/80 text-sm font-medium">{item}</span>
+              <div key={i} className="p-6 bg-white border border-warm-gray">
+                <p className="text-navy font-semibold text-sm mb-2">{item.title}</p>
+                <p className="text-navy/60 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -335,27 +352,31 @@ export default function Energy() {
       <Section className="py-20 md:py-28 bg-navy">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-            The New Reality
+            The Structural Reality
           </p>
           <h2
             className="text-3xl md:text-4xl font-bold text-white leading-tight mb-8"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            A Structural Shift in European Energy Markets
+            Carbon Has Permanently Changed the Economics of European Energy
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-3xl">
-            The EU ETS has transformed carbon emissions into a tradable financial liability embedded within the energy system. Understanding how regulatory and market forces interact has become essential for companies operating in Europe's energy-intensive sectors.
+          <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
+            The EU ETS is not a transitional programme. It is the permanent regulatory architecture for European decarbonisation, with progressively tighter caps, expanding sectoral coverage, and increasing market sophistication.
           </p>
-          <p className="text-white/50 text-sm font-semibold tracking-[0.2em] uppercase mb-6">
-            What this affects
+          <p className="text-white/60 text-lg leading-relaxed mb-6 max-w-3xl">
+            For power generators, industrial operators, fuel suppliers, renewable asset owners, and energy investors, carbon is now a core variable in every major business decision — from capital allocation and asset acquisition to energy procurement and margin forecasting.
           </p>
+          <p className="text-white/60 text-lg leading-relaxed mb-12 max-w-3xl">
+            Companies that treat carbon as an afterthought will find themselves at a structural disadvantage. Those that understand the market dynamics, regulatory trajectory, and cross-commodity interactions will be better positioned to protect margins and compete effectively in a carbon-constrained European economy.
+          </p>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              'Operating margins',
-              'Energy procurement strategies',
-              'Asset profitability',
-              'Long-term investment planning',
-              'Competitiveness in global markets',
+              'Operating margins under pressure',
+              'Energy procurement repricing',
+              'Asset valuations shifting',
+              'Investment theses rewritten',
+              'Competitive positioning at stake',
             ].map((item, i) => (
               <div
                 key={i}
@@ -368,22 +389,19 @@ export default function Energy() {
         </div>
       </Section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 md:py-20 bg-cream">
+      {/* Source attribution */}
+      <section className="py-10 bg-cream">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-navy/10">
+          <p className="text-navy/30 text-xs tracking-wide">
+            Sources: European Commission DG CLIMA; International Carbon Action Partnership (ICAP); EU ETS Directive 2003/87/EC as amended.
+          </p>
+          <div className="mt-8 pt-6 border-t border-navy/10">
             <Link
               to="/"
               className="text-gold-dark text-sm font-semibold tracking-widest uppercase hover:text-gold transition-colors duration-300"
             >
               &larr; Back to Home
             </Link>
-            <a
-              href="/#contact"
-              className="px-8 py-3 bg-gold text-navy text-xs font-semibold tracking-widest uppercase hover:bg-gold-dark transition-all duration-300"
-            >
-              Get in Touch
-            </a>
           </div>
         </div>
       </section>
