@@ -21,7 +21,7 @@ function Section({ children, className = '', id }) {
   )
 }
 
-export default function RenewableEnergy() {
+export default function CarbonEts() {
   const [lightbox, setLightbox] = useState(false)
   useEffect(() => {
     window.scrollTo(0, 0)
