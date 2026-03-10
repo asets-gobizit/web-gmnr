@@ -6,6 +6,7 @@ import Logo from './Logo'
 const links = [
   { label: 'About', section: 'about' },
   { label: 'Services', section: 'services' },
+  { label: 'Energy', section: 'energy', route: '/energy' },
   { label: 'Process', section: 'process' },
   { label: 'Insights', section: 'blog' },
   { label: 'Contact', section: 'contact' },
@@ -65,7 +66,7 @@ export default function Navbar() {
           {links.map((link) => (
             <button
               key={link.section}
-              onClick={() => scrollToSection(link.section)}
+              onClick={() => link.route ? navigate(link.route) : scrollToSection(link.section)}
               className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer"
             >
               {link.label}
@@ -104,7 +105,7 @@ export default function Navbar() {
               {links.map((link) => (
                 <button
                   key={link.section}
-                  onClick={() => { scrollToSection(link.section); setMobileOpen(false) }}
+                  onClick={() => { link.route ? navigate(link.route) : scrollToSection(link.section); setMobileOpen(false) }}
                   className="text-white/80 text-sm tracking-widest uppercase hover:text-gold transition-colors text-left cursor-pointer"
                 >
                   {link.label}
