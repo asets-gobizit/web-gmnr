@@ -12,7 +12,7 @@ const links = [
 ]
 
 const projectLinks = [
-  { label: 'Energy', route: '/projects/energy' },
+  { label: 'Renewable Energy', route: '/projects/renewable-energy' },
 ]
 
 export default function Navbar() {

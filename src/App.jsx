@@ -10,7 +10,7 @@ import Blog from './components/Blog'
 import FinalCTA from './components/FinalCTA'
 import Footer from './components/Footer'
 import BlogPost from './pages/BlogPost'
-import Energy from './pages/Energy'
+import RenewableEnergy from './pages/RenewableEnergy'
 
 function HomePage() {
   return (
@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/projects/energy" element={<Energy />} />
+          <Route path="/projects/renewable-energy" element={<RenewableEnergy />} />
         </Routes>
         <Footer />
       </div>
