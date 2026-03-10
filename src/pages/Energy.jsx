@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import ets2Image from '../assets/Image-EST2.png'
@@ -22,6 +22,7 @@ function Section({ children, className = '', id }) {
 }
 
 export default function Energy() {
+  const [lightbox, setLightbox] = useState(false)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -84,32 +85,82 @@ export default function Energy() {
         </div>
       </Section>
 
-      {/* ETS2 Timeline Visual */}
-      <Section className="py-16 md:py-24 bg-navy">
+      {/* ETS2 Timeline Visual — Interactive */}
+      <Section className="py-16 md:py-24 bg-gradient-to-b from-navy via-[#0a1628] to-navy overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-4">
               Regulatory Timeline
             </p>
             <h2
-              className="text-2xl md:text-3xl font-bold text-white leading-tight"
+              className="text-2xl md:text-3xl font-bold text-white leading-tight mb-4"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
               EU ETS2 — Expanding the Carbon Market
             </h2>
+            <p className="text-white/50 text-sm max-w-xl mx-auto">
+              Click the diagram below to view it in full screen
+            </p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-4 md:p-8">
-            <img
-              src={ets2Image}
-              alt="EU ETS2 regulatory timeline — DG CLIMA framework"
-              className="w-full rounded"
-            />
+
+          {/* Decorative glow behind card */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gold/5 rounded-2xl blur-2xl" />
+            <div
+              className="relative group cursor-pointer rounded-xl overflow-hidden border border-gold/20 shadow-2xl shadow-gold/5 transition-all duration-500 hover:border-gold/40 hover:shadow-gold/10"
+              onClick={() => setLightbox(true)}
+            >
+              {/* Gold accent bar */}
+              <div className="h-1 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+              <div className="bg-white p-3 md:p-6">
+                <img
+                  src={ets2Image}
+                  alt="EU ETS2 regulatory timeline — DG CLIMA framework"
+                  className="w-full rounded"
+                />
+              </div>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-all duration-500 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gold/90 text-navy px-6 py-3 rounded-full font-semibold text-sm tracking-wider uppercase flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                  View Full Size
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-white/40 text-sm text-center mt-6 italic">
+
+          <p className="text-white/30 text-xs text-center mt-6 italic tracking-wide">
             Source: DG CLIMA — EU Emissions Trading System framework
           </p>
         </div>
       </Section>
+
+      {/* Lightbox overlay */}
+      {lightbox && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 cursor-zoom-out"
+          onClick={() => setLightbox(false)}
+        >
+          <button
+            onClick={() => setLightbox(false)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <motion.img
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            src={ets2Image}
+            alt="EU ETS2 regulatory timeline — DG CLIMA framework"
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </motion.div>
+      )}
 
       {/* Price Volatility */}
       <Section className="py-20 md:py-28 bg-white">
