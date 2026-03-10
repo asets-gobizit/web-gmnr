@@ -101,7 +101,7 @@ function PersonCard({ photo, altText, name, title, bio, credentials, reverse, de
 
 export default function About() {
   return (
-    <section id="about" className="py-28 md:py-40 bg-white overflow-hidden">
+    <section id="about" className="pt-28 pb-12 md:pt-40 md:pb-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-32">
 
         <PersonCard
