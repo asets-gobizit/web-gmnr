@@ -86,7 +86,7 @@ export default function Energy() {
               <img
                 src={ets2Image}
                 alt="EU ETS2 regulatory timeline — DG CLIMA framework"
-                className="w-full max-w-md rounded shadow-lg"
+                className="w-full max-w-3xl rounded shadow-lg"
               />
             </div>
           </div>
