@@ -64,32 +64,50 @@ export default function Energy() {
       {/* The Core Mechanism */}
       <Section className="py-20 md:py-28 bg-cream">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div>
-              <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
-                The Core Mechanism
-              </p>
-              <h2
-                className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
-                style={{ fontFamily: 'var(--font-serif)' }}
-              >
-                How the EU ETS Creates Cost Exposure
-              </h2>
-              <p className="text-navy/70 text-lg leading-relaxed mb-6">
-                Under the EU ETS, companies must purchase and surrender EU Allowances (EUAs) to cover their verified annual emissions. Each allowance represents one tonne of CO₂. Failure to surrender results in financial penalties and reputational risk.
-              </p>
-              <p className="text-navy/70 text-lg leading-relaxed">
-                EUAs are traded as a market commodity — on exchanges such as EEX and ICE, as well as over-the-counter. This means carbon is no longer a regulatory formality. It is a cost line subject to the same forces as any other traded commodity: supply constraints, policy shifts, and speculative activity.
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <img
-                src={ets2Image}
-                alt="EU ETS2 regulatory timeline — DG CLIMA framework"
-                className="w-full max-w-3xl rounded shadow-lg"
-              />
-            </div>
+          <div className="max-w-3xl">
+            <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">
+              The Core Mechanism
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold text-navy leading-tight mb-8"
+              style={{ fontFamily: 'var(--font-serif)' }}
+            >
+              How the EU ETS Creates Cost Exposure
+            </h2>
+            <p className="text-navy/70 text-lg leading-relaxed mb-6">
+              Under the EU ETS, companies must purchase and surrender EU Allowances (EUAs) to cover their verified annual emissions. Each allowance represents one tonne of CO₂. Failure to surrender results in financial penalties and reputational risk.
+            </p>
+            <p className="text-navy/70 text-lg leading-relaxed">
+              EUAs are traded as a market commodity — on exchanges such as EEX and ICE, as well as over-the-counter. This means carbon is no longer a regulatory formality. It is a cost line subject to the same forces as any other traded commodity: supply constraints, policy shifts, and speculative activity.
+            </p>
           </div>
+        </div>
+      </Section>
+
+      {/* ETS2 Timeline Visual */}
+      <Section className="py-16 md:py-24 bg-navy">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-10">
+            <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+              Regulatory Timeline
+            </p>
+            <h2
+              className="text-2xl md:text-3xl font-bold text-white leading-tight"
+              style={{ fontFamily: 'var(--font-serif)' }}
+            >
+              EU ETS2 — Expanding the Carbon Market
+            </h2>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4 md:p-8">
+            <img
+              src={ets2Image}
+              alt="EU ETS2 regulatory timeline — DG CLIMA framework"
+              className="w-full rounded"
+            />
+          </div>
+          <p className="text-white/40 text-sm text-center mt-6 italic">
+            Source: DG CLIMA — EU Emissions Trading System framework
+          </p>
         </div>
       </Section>
 
