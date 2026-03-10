@@ -6,10 +6,13 @@ import Logo from './Logo'
 const links = [
   { label: 'About', section: 'about' },
   { label: 'Services', section: 'services' },
-  { label: 'Energy', section: 'energy', route: '/energy' },
   { label: 'Process', section: 'process' },
   { label: 'Insights', section: 'blog' },
   { label: 'Contact', section: 'contact' },
+]
+
+const projectLinks = [
+  { label: 'Energy', route: '/energy' },
 ]
 
 export default function Navbar() {
@@ -63,10 +66,31 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10">
+          {/* Projects dropdown — first item */}
+          <div className="relative group">
+            <button className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer flex items-center gap-1">
+              Projects
+              <svg className="w-3 h-3 mt-0.5 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="bg-navy border border-white/10 shadow-xl min-w-[180px]">
+                {projectLinks.map((pl) => (
+                  <button
+                    key={pl.route}
+                    onClick={() => navigate(pl.route)}
+                    className="block w-full text-left px-5 py-3 text-white/70 text-sm tracking-widest uppercase hover:text-gold hover:bg-white/5 transition-colors duration-200 cursor-pointer"
+                  >
+                    {pl.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {links.map((link) => (
             <button
               key={link.section}
-              onClick={() => link.route ? navigate(link.route) : scrollToSection(link.section)}
+              onClick={() => scrollToSection(link.section)}
               className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer"
             >
               {link.label}
@@ -102,10 +126,22 @@ export default function Navbar() {
             className="md:hidden bg-navy border-t border-white/10 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
+              {/* Projects section */}
+              <span className="text-white/40 text-xs tracking-widest uppercase">Projects</span>
+              {projectLinks.map((pl) => (
+                <button
+                  key={pl.route}
+                  onClick={() => { navigate(pl.route); setMobileOpen(false) }}
+                  className="text-white/80 text-sm tracking-widest uppercase hover:text-gold transition-colors text-left cursor-pointer pl-4"
+                >
+                  {pl.label}
+                </button>
+              ))}
+              <div className="border-t border-white/10 my-2" />
               {links.map((link) => (
                 <button
                   key={link.section}
-                  onClick={() => { link.route ? navigate(link.route) : scrollToSection(link.section); setMobileOpen(false) }}
+                  onClick={() => { scrollToSection(link.section); setMobileOpen(false) }}
                   className="text-white/80 text-sm tracking-widest uppercase hover:text-gold transition-colors text-left cursor-pointer"
                 >
                   {link.label}
