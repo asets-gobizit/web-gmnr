@@ -52,9 +52,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-5 justify-center"
         >
           <a
-            href="https://gobizit.zohobookings.com/#/3843393000005945022"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
             className="px-10 py-4 bg-gold text-navy text-sm font-bold tracking-widest uppercase hover:bg-gold-light transition-all duration-300"
           >
             Book a Free Consultation
