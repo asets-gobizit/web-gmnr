@@ -103,12 +103,14 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          <button
-            onClick={() => scrollToSection('contact')}
+          <a
+            href="https://gobizit.zohobookings.com/#/3843393000005945022"
+            target="_blank"
+            rel="noopener noreferrer"
             className="ml-4 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
           >
             Book a Call
-          </button>
+          </a>
         </nav>
 
         {/* Mobile toggle */}
@@ -154,12 +156,14 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
-              <button
-                onClick={() => { scrollToSection('contact'); setMobileOpen(false) }}
+              <a
+                href="https://gobizit.zohobookings.com/#/3843393000005945022"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-2 px-6 py-3 border border-gold text-gold text-xs font-semibold tracking-widest uppercase text-center hover:bg-gold hover:text-navy transition-all cursor-pointer"
               >
                 Book a Call
-              </button>
+              </a>
             </div>
           </motion.nav>
         )}
