@@ -1,6 +1,9 @@
+import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './Logo'
 
 export default function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="bg-navy-dark py-12 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
@@ -8,7 +11,7 @@ export default function Footer() {
           <div className="flex items-center gap-8">
             <Logo size="sm" variant="light" />
             <span className="text-white/20 text-sm">
-              Business Development, Outsourced
+              {t('footer.tagline')}
             </span>
           </div>
 
@@ -34,7 +37,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-white/5 text-center">
           <p className="text-white/15 text-xs tracking-wide">
-            &copy; {new Date().getFullYear()} GMnR Consultants. All rights reserved. Tel Aviv, Israel.
+            &copy; {new Date().getFullYear()} {t('footer.copyright')}
           </p>
         </div>
       </div>

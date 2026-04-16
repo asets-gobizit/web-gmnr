@@ -1,23 +1,27 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import blogPosts from '../data/blogPosts'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const post = blogPosts.find((p) => p.slug === slug)
+  const { t, langPrefix } = useLanguage()
+
+  const posts = t('blog.posts')
+  const post = posts.find((p) => p.slug === slug)
+  const content = t(`blogContent.${slug}`)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [slug])
 
-  if (!post) {
+  if (!post || !Array.isArray(content)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream pt-20">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-navy mb-4">Article Not Found</h1>
-          <Link to="/" className="text-gold-dark font-semibold hover:underline">
-            &larr; Back to Home
+          <h1 className="text-3xl font-bold text-navy mb-4">{t('blogPost.notFound')}</h1>
+          <Link to={`${langPrefix}/`} className="text-gold-dark font-semibold hover:underline">
+            &larr; {t('blogPost.backHome')}
           </Link>
         </div>
       </div>
@@ -27,21 +31,19 @@ export default function BlogPost() {
   return (
     <article className="bg-cream min-h-screen pt-32 pb-20">
       <div className="max-w-3xl mx-auto px-6 lg:px-12">
-        {/* Back link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
           <Link
-            to="/"
+            to={`${langPrefix}/`}
             className="inline-flex items-center gap-2 text-gold-dark text-sm font-semibold tracking-widest uppercase hover:text-gold transition-colors duration-300 mb-12"
           >
-            &larr; Back to Insights
+            &larr; {t('blogPost.backInsights')}
           </Link>
         </motion.div>
 
-        {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,14 +61,13 @@ export default function BlogPost() {
           </h1>
         </motion.header>
 
-        {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="space-y-6"
         >
-          {post.content.map((block, i) => {
+          {content.map((block, i) => {
             switch (block.type) {
               case 'p':
                 return (
@@ -119,7 +120,6 @@ export default function BlogPost() {
           })}
         </motion.div>
 
-        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -128,16 +128,16 @@ export default function BlogPost() {
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <Link
-              to="/"
+              to={`${langPrefix}/`}
               className="text-gold-dark text-sm font-semibold tracking-widest uppercase hover:text-gold transition-colors duration-300"
             >
-              &larr; Back to Insights
+              &larr; {t('blogPost.backInsights')}
             </Link>
             <a
-              href="/#contact"
+              href={`${langPrefix}/#contact`}
               className="px-8 py-3 bg-gold text-navy text-xs font-semibold tracking-widest uppercase hover:bg-gold-dark transition-all duration-300"
             >
-              Get in Touch
+              {t('blogPost.getInTouch')}
             </a>
           </div>
         </motion.div>

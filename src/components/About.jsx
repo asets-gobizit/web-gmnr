@@ -1,27 +1,16 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
 import guyPhoto from '../assets/guy-molcho-new.png'
 import dannyPhoto from '../assets/danny-nissani.png'
-
-const guyCredentials = [
-  { label: 'Years of Experience', value: '20+' },
-  { label: 'Markets Entered', value: '15+' },
-  { label: 'Deals Closed', value: '50+' },
-]
-
-const dannyCredentials = [
-  { label: 'Years of Experience', value: '20+' },
-  { label: 'Integrations & Automations', value: '200+' },
-  { label: 'Systems Implemented & Architected', value: '500+' },
-]
 
 function PersonCard({ photo, altText, name, title, bio, credentials, reverse, delay }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
 
   return (
     <div ref={ref} className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${reverse ? 'lg:grid-flow-dense' : ''}`}>
-      {/* Photo */}
       <motion.div
         initial={{ opacity: 0, x: reverse ? 60 : -60 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -42,7 +31,6 @@ function PersonCard({ photo, altText, name, title, bio, credentials, reverse, de
         />
       </motion.div>
 
-      {/* Text */}
       <div className={reverse ? 'lg:col-start-1 lg:row-start-1' : ''}>
         <motion.p
           initial={{ opacity: 0 }}
@@ -50,7 +38,7 @@ function PersonCard({ photo, altText, name, title, bio, credentials, reverse, de
           transition={{ duration: 0.6, delay: delay + 0.2 }}
           className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6"
         >
-          About
+          {t('about.label')}
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -100,40 +88,33 @@ function PersonCard({ photo, altText, name, title, bio, credentials, reverse, de
 }
 
 export default function About() {
+  const { t } = useLanguage()
+  const guy = t('about.guy')
+  const danny = t('about.danny')
+
   return (
     <section id="about" className="pt-28 pb-12 md:pt-40 md:pb-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-32">
-
         <PersonCard
           photo={guyPhoto}
           altText="Guy Molcho — Founder of GMnR Consultants"
-          name="Guy Molcho"
-          title="Founder & Principal Consultant"
-          bio={[
-            'With over two decades in international business development, M&A advisory, and strategic growth consulting, I help companies expand into new markets and close deals that move the needle.',
-            "My background spans renewable energy, clean-tech, real estate finance, and cross-border transactions. I've worked with multinationals and startups alike — from securing key accounts in new territories to structuring joint ventures and acquisition deals across Europe, Asia, and the Americas.",
-            'GMnR Consultants exists because not every company needs a full-time business development team — but every company deserves one that delivers.',
-          ]}
-          credentials={guyCredentials}
+          name={guy.name}
+          title={guy.title}
+          bio={guy.bio}
+          credentials={guy.credentials}
           reverse={false}
           delay={0}
         />
-
         <PersonCard
           photo={dannyPhoto}
           altText="Danny Nissani — AI-Driven Business Systems Architect"
-          name="Danny Nissani"
-          title="AI-Driven Business Systems Architect"
-          bio={[
-            'Danny Nissani specializes in building the technological and operational infrastructure that enables companies to scale internationally and operate more efficiently. With over two decades of experience in enterprise systems and digital transformation, he focuses on applying advanced AI automation, intelligent workflows, and integrated business architectures to support strategic growth.',
-            'His background combines technology, business systems architecture, and legal expertise, allowing him to bridge complex operational challenges with practical commercial execution. Danny also brings strong negotiation and deal-structuring capabilities, supporting cross-border partnerships and renewable energy initiatives.',
-            'At GMnR Consultants, Danny develops AI-driven systems that support market expansion and scalable international collaboration.',
-          ]}
-          credentials={dannyCredentials}
+          name={danny.name}
+          title={danny.title}
+          bio={danny.bio}
+          credentials={danny.credentials}
           reverse={true}
           delay={0.1}
         />
-
       </div>
     </section>
   )

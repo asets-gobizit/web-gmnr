@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { LanguageProvider } from './i18n/LanguageContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Pain from './components/Pain'
@@ -28,19 +29,30 @@ function HomePage() {
   )
 }
 
-function App() {
+function AppLayout() {
   return (
-    <BrowserRouter>
+    <LanguageProvider>
       <div className="bg-white text-navy-dark">
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/projects/carbon-ets" element={<CarbonEts />} />
-          <Route path="/projects/renewable-energy" element={<RenewableEnergy />} />
+          <Route index element={<HomePage />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="projects/carbon-ets" element={<CarbonEts />} />
+          <Route path="projects/renewable-energy" element={<RenewableEnergy />} />
         </Routes>
         <Footer />
       </div>
+    </LanguageProvider>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/es/*" element={<AppLayout />} />
+        <Route path="/*" element={<AppLayout />} />
+      </Routes>
     </BrowserRouter>
   )
 }

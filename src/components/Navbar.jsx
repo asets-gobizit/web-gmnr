@@ -1,20 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './Logo'
-
-const links = [
-  { label: 'About', section: 'about' },
-  { label: 'Services', section: 'services' },
-  { label: 'Process', section: 'process' },
-  { label: 'Insights', section: 'blog' },
-  { label: 'Contact', section: 'contact' },
-]
-
-const projectLinks = [
-  { label: 'Carbon & ETS', route: '/projects/carbon-ets' },
-  { label: 'Renewable Energy', route: '/projects/renewable-energy' },
-]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -22,7 +10,22 @@ export default function Navbar() {
   const [projectsOpen, setProjectsOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
-  const isHome = location.pathname === '/'
+  const { lang, langPrefix, t, switchLanguage } = useLanguage()
+
+  const isHome = location.pathname === '/' || location.pathname === '/es' || location.pathname === '/es/'
+
+  const links = [
+    { label: t('nav.about'), section: 'about' },
+    { label: t('nav.services'), section: 'services' },
+    { label: t('nav.process'), section: 'process' },
+    { label: t('nav.insights'), section: 'blog' },
+    { label: t('nav.contact'), section: 'contact' },
+  ]
+
+  const projectLinks = [
+    { label: t('nav.carbonEts'), route: `${langPrefix}/projects/carbon-ets` },
+    { label: t('nav.renewableEnergy'), route: `${langPrefix}/projects/renewable-energy` },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -35,8 +38,7 @@ export default function Navbar() {
       const el = document.getElementById(section)
       if (el) el.scrollIntoView({ behavior: 'smooth' })
     } else {
-      navigate('/')
-      // Wait for homepage to render, then scroll
+      navigate(`${langPrefix}/`)
       setTimeout(() => {
         const el = document.getElementById(section)
         if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -48,7 +50,7 @@ export default function Navbar() {
     if (isHome) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-      navigate('/')
+      navigate(`${langPrefix}/`)
     }
   }
 
@@ -78,13 +80,13 @@ export default function Navbar() {
             </button>
           ))}
 
-          {/* Projects dropdown — rightmost before Book a Call */}
+          {/* Projects dropdown */}
           <div className="relative">
             <button
               onClick={() => setProjectsOpen(!projectsOpen)}
               className="text-white/70 text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer flex items-center gap-1"
             >
-              Projects
+              {t('nav.projects')}
               <svg className={`w-3 h-3 mt-0.5 transition-transform ${projectsOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
             </button>
             {projectsOpen && (
@@ -103,11 +105,20 @@ export default function Navbar() {
               </div>
             )}
           </div>
+
+          {/* Language switcher */}
+          <button
+            onClick={switchLanguage}
+            className="text-white/50 text-xs font-semibold tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer border border-white/15 px-3 py-1.5 hover:border-gold/40"
+          >
+            {lang === 'en' ? 'ES' : 'EN'}
+          </button>
+
           <button
             onClick={() => scrollToSection('contact')}
-            className="ml-4 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
+            className="ml-2 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
           >
-            Book a Call
+            {t('nav.bookCall')}
           </button>
         </nav>
 
@@ -133,8 +144,17 @@ export default function Navbar() {
             className="md:hidden bg-navy border-t border-white/10 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
+              {/* Language switcher mobile */}
+              <button
+                onClick={() => { switchLanguage(); setMobileOpen(false) }}
+                className="self-start text-white/50 text-xs font-semibold tracking-widest uppercase border border-white/15 px-3 py-1.5 hover:text-gold hover:border-gold/40 transition-colors cursor-pointer"
+              >
+                {lang === 'en' ? 'ES \u2014 Espa\u00F1ol' : 'EN \u2014 English'}
+              </button>
+              <div className="border-t border-white/10 my-1" />
+
               {/* Projects section */}
-              <span className="text-white/40 text-xs tracking-widest uppercase">Projects</span>
+              <span className="text-white/40 text-xs tracking-widest uppercase">{t('nav.projects')}</span>
               {projectLinks.map((pl) => (
                 <button
                   key={pl.route}
@@ -158,7 +178,7 @@ export default function Navbar() {
                 onClick={() => { scrollToSection('contact'); setMobileOpen(false) }}
                 className="mt-2 px-6 py-3 border border-gold text-gold text-xs font-semibold tracking-widest uppercase text-center hover:bg-gold hover:text-navy transition-all cursor-pointer"
               >
-                Book a Call
+                {t('nav.bookCall')}
               </button>
             </div>
           </motion.nav>

@@ -1,28 +1,8 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const steps = [
-  {
-    number: '01',
-    title: 'Understand',
-    subtitle: 'Deep Immersion',
-    description: 'I learn your business from the inside — product, market, competitive landscape, growth ambitions. No generic playbooks. Every engagement starts with genuine understanding.',
-  },
-  {
-    number: '02',
-    title: 'Strategize',
-    subtitle: 'Precision Planning',
-    description: 'Together we define targets, prioritize opportunities, and build a roadmap with clear milestones. You know exactly what we\'re going after, why, and how we\'ll measure success.',
-  },
-  {
-    number: '03',
-    title: 'Execute',
-    subtitle: 'Relentless Action',
-    description: 'I do the work — outreach, meetings, negotiations, deal structuring. You get senior-level execution and regular progress updates, not slide decks and status reports.',
-  },
-]
-
-function Step({ step, index }) {
+function Step({ step, index, totalSteps }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -34,8 +14,7 @@ function Step({ step, index }) {
       transition={{ duration: 0.7, delay: index * 0.2 }}
       className="relative"
     >
-      {/* Connector line */}
-      {index < steps.length - 1 && (
+      {index < totalSteps - 1 && (
         <div className="hidden md:block absolute top-8 left-[calc(50%+40px)] right-[calc(-50%+40px)] h-px bg-gradient-to-r from-gold/40 to-gold/10" />
       )}
 
@@ -60,10 +39,11 @@ function Step({ step, index }) {
 export default function Process() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
+  const steps = t('process.steps')
 
   return (
     <section id="process" className="py-28 md:py-40 bg-navy relative overflow-hidden">
-      {/* Decorative element */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gold/[0.02] rounded-full blur-3xl" />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-12 relative">
@@ -74,7 +54,7 @@ export default function Process() {
             transition={{ duration: 0.6 }}
             className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6"
           >
-            The Process
+            {t('process.label')}
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -83,14 +63,14 @@ export default function Process() {
             className="text-4xl md:text-5xl font-bold text-white leading-tight"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Three steps.{' '}
-            <span className="italic text-gold">No complexity.</span>
+            {t('process.heading')}{' '}
+            <span className="italic text-gold">{t('process.headingAccent')}</span>
           </motion.h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-12 md:gap-8">
           {steps.map((step, i) => (
-            <Step key={step.number} step={step} index={i} />
+            <Step key={step.number} step={step} index={i} totalSteps={steps.length} />
           ))}
         </div>
       </div>

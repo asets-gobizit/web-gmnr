@@ -1,24 +1,6 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-
-const painPoints = [
-  {
-    number: '01',
-    title: 'Your Pipeline Has Stalled',
-    description: 'You know there are opportunities out there — new markets, new partnerships, new verticals — but your team is stretched thin running the existing business. Growth initiatives keep getting pushed to next quarter.',
-  },
-  {
-    number: '02',
-    title: 'Hiring Is Slow and Expensive',
-    description: "A senior business development hire takes months to recruit, months to onboard, and comes with significant fixed costs — salary, benefits, overhead. And there's no guarantee they'll deliver.",
-  },
-  {
-    number: '03',
-    title: 'You Need Results, Not Reports',
-    description: "You've tried consultants before. They delivered frameworks and presentations, not signed deals and opened markets. You need someone who does the work, not someone who tells you what work to do.",
-  },
-]
+import { useLanguage } from '../i18n/LanguageContext'
 
 function PainCard({ point, index }) {
   const ref = useRef(null)
@@ -50,12 +32,13 @@ function PainCard({ point, index }) {
 export default function Pain() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
+  const painPoints = t('pain.points')
 
   return (
     <section className="py-28 md:py-40 bg-cream">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Left: editorial headline */}
           <div ref={ref} className="lg:sticky lg:top-32">
             <motion.p
               initial={{ opacity: 0 }}
@@ -63,7 +46,7 @@ export default function Pain() {
               transition={{ duration: 0.6 }}
               className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6"
             >
-              The Challenge
+              {t('pain.label')}
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -72,12 +55,11 @@ export default function Pain() {
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
-              Growth doesn't wait for you to be{' '}
-              <span className="italic text-gold-dark">ready.</span>
+              {t('pain.heading')}{' '}
+              <span className="italic text-gold-dark">{t('pain.headingAccent')}</span>
             </motion.h2>
           </div>
 
-          {/* Right: pain points */}
           <div className="flex flex-col gap-14">
             {painPoints.map((point, i) => (
               <PainCard key={point.number} point={point} index={i} />

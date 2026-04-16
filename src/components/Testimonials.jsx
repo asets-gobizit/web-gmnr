@@ -1,23 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-
-const testimonials = [
-  {
-    quote: "Guy doesn't just open doors — he walks through them with you. Within six months he'd secured two anchor clients in a market we'd been trying to crack for years.",
-    author: 'CEO',
-    company: 'Israeli Clean-Tech Company',
-  },
-  {
-    quote: "What sets Guy apart is his ability to understand both sides of a deal. He structured a JV that perfectly balanced our interests and helped us win a project we couldn't have won alone.",
-    author: 'VP Business Development',
-    company: 'European Energy Solutions Provider',
-  },
-  {
-    quote: 'We needed senior-level BD without the cost of a full-time hire. Guy delivered exactly that — strategic thinking and hands-on execution, with none of the overhead.',
-    author: 'Managing Director',
-    company: 'International Infrastructure Firm',
-  },
-]
+import { useLanguage } from '../i18n/LanguageContext'
 
 function TestimonialCard({ testimonial, index }) {
   const ref = useRef(null)
@@ -32,7 +15,6 @@ function TestimonialCard({ testimonial, index }) {
       className={`${index === 0 ? 'md:col-span-2' : ''}`}
     >
       <div className="h-full bg-white p-10 md:p-14 border border-warm-gray relative">
-        {/* Large decorative quote */}
         <span
           className="absolute top-6 left-8 text-8xl text-gold/10 leading-none pointer-events-none"
           style={{ fontFamily: 'var(--font-serif)' }}
@@ -60,6 +42,8 @@ function TestimonialCard({ testimonial, index }) {
 export default function Testimonials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
+  const items = t('testimonials.items')
 
   return (
     <section className="py-28 md:py-40 bg-cream">
@@ -71,7 +55,7 @@ export default function Testimonials() {
             transition={{ duration: 0.6 }}
             className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6"
           >
-            Client Results
+            {t('testimonials.label')}
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -80,14 +64,14 @@ export default function Testimonials() {
             className="text-4xl md:text-5xl font-bold text-navy leading-tight"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Trusted by leaders{' '}
-            <span className="italic text-gold-dark">who demand results.</span>
+            {t('testimonials.heading')}{' '}
+            <span className="italic text-gold-dark">{t('testimonials.headingAccent')}</span>
           </motion.h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} testimonial={t} index={i} />
+          {items.map((testimonial, i) => (
+            <TestimonialCard key={i} testimonial={testimonial} index={i} />
           ))}
         </div>
       </div>
