@@ -34,12 +34,14 @@ function AppLayout() {
     <LanguageProvider>
       <div className="bg-white text-navy-dark">
         <Navbar />
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="blog/:slug" element={<BlogPost />} />
-          <Route path="projects/carbon-ets" element={<CarbonEts />} />
-          <Route path="projects/renewable-energy" element={<RenewableEnergy />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
+            <Route path="projects/carbon-ets" element={<CarbonEts />} />
+            <Route path="projects/renewable-energy" element={<RenewableEnergy />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </LanguageProvider>

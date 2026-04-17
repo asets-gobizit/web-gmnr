@@ -69,7 +69,7 @@ export default function Navbar() {
         </button>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-10" aria-label="Main navigation">
           {links.map((link) => (
             <button
               key={link.section}
