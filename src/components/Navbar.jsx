@@ -13,6 +13,10 @@ export default function Navbar() {
   const { lang, langPrefix, t, switchLanguage } = useLanguage()
 
   const isHome = location.pathname === '/' || location.pathname === '/es' || location.pathname === '/es/'
+  const isCarbonEts = location.pathname.includes('/projects/carbon-ets')
+  const bookCallUrl = isCarbonEts
+    ? 'https://gobizit.zohobookings.com/#/3843393000005967072'
+    : 'https://gobizit.zohobookings.com/#/3843393000006051022'
 
   const links = [
     { label: t('nav.about'), section: 'about' },
@@ -115,7 +119,7 @@ export default function Navbar() {
           </button>
 
           <a
-            href="https://gobizit.zohobookings.com/#/3843393000005967072"
+            href={bookCallUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="ml-2 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
@@ -177,7 +181,7 @@ export default function Navbar() {
                 </button>
               ))}
               <a
-                href="https://gobizit.zohobookings.com/#/3843393000005967072"
+                href={bookCallUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
