@@ -67,6 +67,25 @@ export default function Navbar() {
         scrolled || !isHome ? 'bg-navy/95 backdrop-blur-md shadow-2xl' : 'bg-transparent'
       }`}
     >
+      {/* Carbon ETS promo strip */}
+      {isCarbonEts && (
+        <div className="bg-gradient-to-r from-navy-dark via-navy to-navy-dark border-b border-gold/20">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+            <p className="text-white/90 text-xs md:text-sm font-medium leading-snug text-center">
+              {t('carbonEts.banner.text')}
+            </p>
+            <a
+              href="https://gobizit.zohobookings.com/#/3843393000005967072"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 px-5 py-1.5 border border-gold/70 text-gold text-[11px] md:text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-gold hover:text-navy transition-all duration-300 whitespace-nowrap"
+            >
+              {t('carbonEts.banner.cta')}
+            </a>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <button onClick={goHome} className="cursor-pointer">
           <Logo size="sm" variant="light" />

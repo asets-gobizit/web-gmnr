@@ -32,27 +32,8 @@ export default function CarbonEts() {
 
   return (
     <div className="bg-cream min-h-screen">
-      {/* Top notice banner — high-visibility gold strip */}
-      <div className="bg-navy pt-20">
-        <div className="bg-gold border-y-2 border-navy/20 shadow-lg">
-          <div className="max-w-6xl mx-auto px-6 lg:px-12 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-navy text-sm md:text-base font-semibold leading-relaxed text-center md:text-left">
-              {t('carbonEts.banner.text')}
-            </p>
-            <a
-              href="https://gobizit.zohobookings.com/#/3843393000005967072"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 self-center md:self-auto px-6 py-3 bg-navy text-gold text-xs font-bold tracking-widest uppercase hover:bg-navy-dark transition-all duration-300 whitespace-nowrap shadow-md"
-            >
-              {t('carbonEts.banner.cta')}
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Hero */}
-      <section className="relative bg-navy pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden">
+      <section className="relative bg-navy pt-40 pb-20 md:pt-48 md:pb-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-navy opacity-90" />
         <div
           className="absolute inset-0 opacity-[0.03]"
