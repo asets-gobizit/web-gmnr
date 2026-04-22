@@ -202,6 +202,10 @@ export default {
   },
 
   carbonEts: {
+    banner: {
+      text: 'By clicking the button at the top left, you can schedule a meeting of up to 15 minutes with an EUAs expert. The meeting is free of charge and carries no obligation.',
+      cta: 'Book A Call',
+    },
     hero: {
       label: 'Carbon & European Energy Markets',
       heading: 'Carbon Is Now a Balance Sheet Item',
