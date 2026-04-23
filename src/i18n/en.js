@@ -203,8 +203,8 @@ export default {
 
   carbonEts: {
     banner: {
-      text: 'By clicking the button at the top left, you can schedule a meeting of up to 15 minutes with an EUAs expert. The meeting is free of charge and carries no obligation.',
-      cta: 'Book A Call',
+      line1: 'By clicking the button at the top left, you can schedule a meeting of up to 15 minutes with an EUAs expert.',
+      line2: 'The meeting is free of charge and carries no obligation.',
     },
     hero: {
       label: 'Carbon & European Energy Markets',

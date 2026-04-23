@@ -69,19 +69,14 @@ export default function Navbar() {
     >
       {/* Carbon ETS promo strip */}
       {isCarbonEts && (
-        <div className="bg-gradient-to-r from-navy-dark via-navy to-navy-dark border-b border-gold/20">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-            <p className="text-white/90 text-xs md:text-sm font-medium leading-snug text-center">
-              {t('carbonEts.banner.text')}
+        <div className="bg-white border-b border-navy/10 shadow-sm">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 text-center">
+            <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
+              {t('carbonEts.banner.line1')}
             </p>
-            <a
-              href="https://gobizit.zohobookings.com/#/3843393000005967072"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 px-5 py-1.5 border border-gold/70 text-gold text-[11px] md:text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-gold hover:text-navy transition-all duration-300 whitespace-nowrap"
-            >
-              {t('carbonEts.banner.cta')}
-            </a>
+            <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
+              {t('carbonEts.banner.line2')}
+            </p>
           </div>
         </div>
       )}
