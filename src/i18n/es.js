@@ -205,6 +205,7 @@ export default {
     banner: {
       line1: 'Al hacer clic en el bot\u00F3n en la parte superior derecha, puedes agendar una reuni\u00F3n de hasta 15 minutos con un experto en EUAs.',
       line2: 'La reuni\u00F3n es gratuita y sin ning\u00FAn compromiso.',
+      cta: 'Reservar una Llamada',
     },
     hero: {
       label: 'Carbono y Mercados Energ\u00E9ticos Europeos',

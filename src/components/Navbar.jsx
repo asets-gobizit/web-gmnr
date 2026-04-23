@@ -70,13 +70,23 @@ export default function Navbar() {
       {/* Carbon ETS promo strip */}
       {isCarbonEts && (
         <div className="bg-white border-b border-navy/10 shadow-sm">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 text-center">
-            <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
-              {t('carbonEts.banner.line1')}
-            </p>
-            <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
-              {t('carbonEts.banner.line2')}
-            </p>
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div className="text-center md:text-left flex-1">
+              <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
+                {t('carbonEts.banner.line1')}
+              </p>
+              <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
+                {t('carbonEts.banner.line2')}
+              </p>
+            </div>
+            <a
+              href="https://gobizit.zohobookings.com/#/3843393000005967072"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 px-5 py-1.5 border border-gold text-gold-dark text-[11px] md:text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-gold hover:text-navy transition-all duration-300 whitespace-nowrap"
+            >
+              {t('carbonEts.banner.cta')}
+            </a>
           </div>
         </div>
       )}
@@ -132,14 +142,16 @@ export default function Navbar() {
             {lang === 'en' ? 'ES' : 'EN'}
           </button>
 
-          <a
-            href={bookCallUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
-          >
-            {t('nav.bookCall')}
-          </a>
+          {!isCarbonEts && (
+            <a
+              href={bookCallUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 px-6 py-2.5 border border-gold text-gold text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-navy transition-all duration-300 cursor-pointer"
+            >
+              {t('nav.bookCall')}
+            </a>
+          )}
         </nav>
 
         {/* Mobile toggle */}
@@ -194,15 +206,17 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
-              <a
-                href={bookCallUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 px-6 py-3 border border-gold text-gold text-xs font-semibold tracking-widest uppercase text-center hover:bg-gold hover:text-navy transition-all cursor-pointer block"
-              >
-                {t('nav.bookCall')}
-              </a>
+              {!isCarbonEts && (
+                <a
+                  href={bookCallUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 px-6 py-3 border border-gold text-gold text-xs font-semibold tracking-widest uppercase text-center hover:bg-gold hover:text-navy transition-all cursor-pointer block"
+                >
+                  {t('nav.bookCall')}
+                </a>
+              )}
             </div>
           </motion.nav>
         )}
