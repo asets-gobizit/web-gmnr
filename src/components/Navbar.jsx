@@ -69,7 +69,7 @@ export default function Navbar() {
     >
       {/* Carbon ETS promo strip */}
       {isCarbonEts && (
-        <div className="bg-white border-b border-navy/10 shadow-sm">
+        <div className="bg-gray-200 border-b border-navy/10 shadow-sm">
           <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-center md:text-left flex-1">
               <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
