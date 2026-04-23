@@ -70,8 +70,8 @@ export default function Navbar() {
       {/* Carbon ETS promo strip */}
       {isCarbonEts && (
         <div className="bg-gray-200 border-b border-navy/10 shadow-sm">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col md:flex-row items-center justify-between gap-3">
-            <div className="text-center md:text-left flex-1">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2.5 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8">
+            <div className="text-center flex-1">
               <p className="text-navy text-xs md:text-sm font-semibold leading-snug">
                 {t('carbonEts.banner.line1')}
               </p>
@@ -79,14 +79,18 @@ export default function Navbar() {
                 {t('carbonEts.banner.line2')}
               </p>
             </div>
-            <a
+            <motion.a
               href="https://gobizit.zohobookings.com/#/3843393000005967072"
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 px-5 py-1.5 border border-gold text-gold-dark text-[11px] md:text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-gold hover:text-navy transition-all duration-300 whitespace-nowrap"
+              animate={{
+                backgroundColor: ['rgba(26, 35, 50, 0)', 'rgba(26, 35, 50, 1)', 'rgba(26, 35, 50, 0)'],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', times: [0, 0.5, 1] }}
+              className="shrink-0 px-5 py-1.5 border border-gold text-gold text-[11px] md:text-xs font-semibold tracking-widest uppercase rounded-full hover:!bg-gold hover:text-navy transition-colors duration-300 whitespace-nowrap"
             >
               {t('carbonEts.banner.cta')}
-            </a>
+            </motion.a>
           </div>
         </div>
       )}
