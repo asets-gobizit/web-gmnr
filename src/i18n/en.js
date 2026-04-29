@@ -203,7 +203,7 @@ export default {
 
   carbonEts: {
     banner: {
-      line1: 'By clicking the button at the top right, you can schedule a meeting of up to 15 minutes with an EUAs expert.',
+      line1: 'By clicking the button at the top right, you can schedule a free meeting with an EUAs expert.',
       line2: 'The meeting is free of charge and carries no obligation.',
       cta: 'Book A Call',
     },
