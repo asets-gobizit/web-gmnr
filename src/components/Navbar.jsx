@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './Logo'
+import carbonAlphaFund from '../i18n/carbonAlphaFund'
 
 /** Union Jack, the flag of the United Kingdom. */
 function UnitedKingdomFlag({ className }) {
@@ -207,6 +208,7 @@ export default function Navbar() {
   const projectLinks = [
     { label: t('nav.carbonEts'), route: `${langPrefix}/projects/carbon-ets` },
     { label: t('nav.renewableEnergy'), route: `${langPrefix}/projects/renewable-energy` },
+    { label: (carbonAlphaFund[lang] || carbonAlphaFund.en).nav, route: `${langPrefix}/projects/carbon-alpha-fund` },
   ]
 
   useEffect(() => {
