@@ -35,6 +35,91 @@ function StatPill({ value, label }) {
   )
 }
 
+// Monthly pro forma returns (%), July 2024 - October 2026: [year, month, value]
+const MONTHLY_RETURNS = [
+  [2024, 7, 4.1], [2024, 8, 6.6], [2024, 9, -4.8], [2024, 10, -2.3], [2024, 11, 4.5], [2024, 12, 2.8],
+  [2025, 1, -6.1], [2025, 2, 6.3], [2025, 3, -6.2], [2025, 4, -0.7], [2025, 5, 19.1], [2025, 6, -2.8],
+  [2025, 7, 17.0], [2025, 8, 0.8], [2025, 9, 9.0], [2025, 10, 9.9], [2025, 11, 6.8], [2025, 12, 5.0],
+  [2026, 1, -14.8], [2026, 2, -12.3], [2026, 3, -0.5], [2026, 4, -1.1], [2026, 5, 11.4], [2026, 6, 6.9],
+  [2026, 7, -0.6], [2026, 8, 14.7], [2026, 9, 9.1], [2026, 10, 18.6],
+]
+
+function formatReturn(value, lang) {
+  const digits = Math.abs(value).toFixed(1)
+  const text = lang === 'es' ? digits.replace('.', ',') : digits
+  return (value < 0 ? '\u2212' : '+') + text
+}
+
+function MonthlyReturnsChart({ lang, months, ariaLabel }) {
+  const W = 900
+  const H = 380
+  const padL = 46
+  const padR = 12
+  const padT = 24
+  const padB = 58
+  const min = -20
+  const max = 20
+  const innerW = W - padL - padR
+  const innerH = H - padT - padB
+  const y = (v) => padT + ((max - v) / (max - min)) * innerH
+  const slot = innerW / MONTHLY_RETURNS.length
+  const barW = slot * 0.66
+  const ticks = [-20, -10, 0, 10, 20]
+  const yearList = [2024, 2025, 2026]
+  const yearOf = MONTHLY_RETURNS.map((r) => r[0])
+
+  return (
+    <svg viewBox={'0 0 ' + W + ' ' + H} role="img" aria-label={ariaLabel} className="w-full h-auto min-w-[760px]">
+      {ticks.map((t) => (
+        <g key={t}>
+          <line x1={padL} x2={W - padR} y1={y(t)} y2={y(t)} stroke="#ffffff" strokeOpacity={t === 0 ? 0.5 : 0.12} />
+          <text x={padL - 8} y={y(t) + 4} textAnchor="end" fontSize="11" fill="#ffffff" fillOpacity="0.5">
+            {t + '%'}
+          </text>
+        </g>
+      ))}
+
+      {MONTHLY_RETURNS.map(([yr, m, v], i) => {
+        const x = padL + i * slot + (slot - barW) / 2
+        const positive = v >= 0
+        const top = y(Math.max(v, 0))
+        const h = Math.max(Math.abs(y(v) - y(0)), 1)
+        return (
+          <g key={yr + '-' + m}>
+            <rect x={x} y={top} width={barW} height={h} fill={positive ? '#c8a250' : '#d9695f'} />
+            <text
+              x={x + barW / 2}
+              y={positive ? top - 5 : top + h + 12}
+              textAnchor="middle"
+              fontSize="9.5"
+              fill="#ffffff"
+              fillOpacity="0.75"
+            >
+              {formatReturn(v, lang)}
+            </text>
+            <text x={x + barW / 2} y={H - padB + 16} textAnchor="middle" fontSize="10.5" fill="#ffffff" fillOpacity="0.55">
+              {months[m - 1]}
+            </text>
+          </g>
+        )
+      })}
+
+      {yearList.map((yr) => {
+        const x1 = padL + yearOf.indexOf(yr) * slot + 4
+        const x2 = padL + (yearOf.lastIndexOf(yr) + 1) * slot - 4
+        return (
+          <g key={yr}>
+            <line x1={x1} x2={x2} y1={H - padB + 28} y2={H - padB + 28} stroke="#ffffff" strokeOpacity="0.25" />
+            <text x={(x1 + x2) / 2} y={H - padB + 46} textAnchor="middle" fontSize="12" fontWeight="600" fill="#ffffff" fillOpacity="0.7">
+              {yr}
+            </text>
+          </g>
+        )
+      })}
+    </svg>
+  )
+}
+
 export default function CarbonAlphaFund() {
   const { lang, langPrefix } = useLanguage()
   const c = content[lang] || content.en
@@ -146,6 +231,41 @@ export default function CarbonAlphaFund() {
             ))}
           </div>
           <p className="text-navy/40 text-sm mt-8 max-w-3xl">{c.drivers.note}</p>
+        </div>
+      </Section>
+
+      {/* Track record (pro forma) */}
+      <Section className="py-20 md:py-28 bg-navy" id="track-record">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+          <p className="text-gold text-xs font-semibold tracking-[0.3em] uppercase mb-6">{c.performance.label}</p>
+          <h2
+            className="text-3xl md:text-4xl font-bold text-white leading-tight mb-8"
+            style={{ fontFamily: 'var(--font-serif)' }}
+          >
+            {c.performance.heading}
+          </h2>
+          <p className="text-white/60 text-lg leading-relaxed max-w-3xl">{c.performance.description}</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 max-w-3xl">
+            {c.performance.years.map((item, i) => (
+              <StatPill key={i} value={item.value} label={item.label} />
+            ))}
+          </div>
+
+          <div className="mt-12 border border-white/10 p-4 md:p-8">
+            <p className="text-white/50 text-xs tracking-[0.2em] uppercase mb-4">{c.performance.chartLabel}</p>
+            <div className="overflow-x-auto">
+              <MonthlyReturnsChart lang={lang} months={c.performance.months} ariaLabel={c.performance.chartAria} />
+            </div>
+          </div>
+
+          <div className="mt-8 max-w-4xl space-y-3">
+            {c.performance.notes.map((note, i) => (
+              <p key={i} className="text-white/40 text-xs leading-relaxed">
+                {note}
+              </p>
+            ))}
+          </div>
         </div>
       </Section>
 
