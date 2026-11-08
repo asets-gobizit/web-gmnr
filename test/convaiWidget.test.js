@@ -7,6 +7,8 @@ import {
   MARIA_ORB_COLOR_1,
   MARIA_ORB_COLOR_2,
   loadConvaiEmbed,
+  guyPhoneLink,
+  GUY_PHONE_HREF,
   mariaWidgetAttributes,
   resetConvaiEmbedLoaderForTests,
   siteLanguage,
@@ -128,6 +130,16 @@ describe('Maria widget attributes', () => {
     }
     assert.equal(JSON.stringify(attributes).includes('agtbrch_'), false)
     assert.equal(JSON.stringify(attributes).includes('xi-api-key'), false)
+    assert.equal(attributes['markdown-link-allowed-hosts'], undefined)
+  })
+
+  it('offers Guy only through the exact tel link', () => {
+    assert.equal(GUY_PHONE_HREF, 'tel:+972502521213')
+    assert.equal(guyPhoneLink('en').href, 'tel:+972502521213')
+    assert.equal(guyPhoneLink('es').href, 'tel:+972502521213')
+    assert.equal(guyPhoneLink('en').label, 'Call +972 50 252 1213')
+    assert.equal(guyPhoneLink('es').label, 'Llamar al +972 50 252 1213')
+    assert.equal(guyPhoneLink('en').label.includes('*'), false)
   })
 })
 
