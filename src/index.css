@@ -24,6 +24,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* The embed host is inset:0. Lift it above the PageSense cookie bar so the
+   call control and the bar's Accept/Deny actions both stay usable.
+   :host sets inset, so bottom needs !important to win. */
+elevenlabs-convai {
+  bottom: 4.5rem !important;
+}
+
+@media (max-width: 767px) {
+  elevenlabs-convai {
+    bottom: 8.5rem !important;
+  }
+}
+
 ::selection {
   background: var(--color-gold);
   color: var(--color-navy);

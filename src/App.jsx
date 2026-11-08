@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import BlogPost from './pages/BlogPost'
 import CarbonEts from './pages/CarbonEts'
 import RenewableEnergy from './pages/RenewableEnergy'
+import MariaWidget from './components/MariaWidget'
 
 function HomePage() {
   return (
@@ -52,10 +53,13 @@ function AppLayout() {
 // pre-renderer (StaticRouter in entry-server.jsx).
 export function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/es/*" element={<AppLayout />} />
-      <Route path="/*" element={<AppLayout />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/es/*" element={<AppLayout />} />
+        <Route path="/*" element={<AppLayout />} />
+      </Routes>
+      <MariaWidget />
+    </>
   )
 }
 
