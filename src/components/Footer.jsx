@@ -5,8 +5,8 @@ export default function Footer() {
   const { t } = useLanguage()
 
   return (
-    <footer className="bg-navy-dark pt-12 pb-64 md:pb-28 border-t border-white/5" aria-label="Site footer">
-      <div className="max-w-6xl mx-auto px-6 lg:pl-12 md:pr-80">
+    <footer className="bg-navy-dark py-12 border-t border-white/5" aria-label="Site footer">
+      <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-8">
             <Logo size="sm" variant="light" />
