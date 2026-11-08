@@ -78,6 +78,26 @@ const content = {
         },
       ],
     },
+    performance: {
+      label: 'Track record · Pro forma',
+      heading: 'Monthly returns, July 2024 – October 2026',
+      description:
+        'Pro forma net P&L as a percentage of a fixed €250k notional capital base, non-compounded. 17 of 28 calendar months were positive. The best month was +19.1% (May 2025) and the worst was −14.8% (January 2026).',
+      years: [
+        { value: '+10.9%', label: '2024 (from July)' },
+        { value: '+58.0%', label: '2025' },
+        { value: '+31.3%', label: '2026 (to 30 Oct)' },
+      ],
+      chartLabel: 'Monthly pro forma return, %',
+      chartAria:
+        'Bar chart of pro forma monthly returns from July 2024 to October 2026. 17 of 28 months were positive; best month +19.1% in May 2025, worst month −14.8% in January 2026.',
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      notes: [
+        'Track record basis: carve-out of ICE Endex EUA futures trades from a proprietary trading account, 1 July 2024 – 30 October 2026, reconciled to broker account statements. Not audited or independently verified.',
+        'Pro forma, net of transaction costs (execution fees) and gross of management and performance fees. Returns are on a fixed €250,000 notional capital base, non-compounded, with no subscriptions, redemptions or interest income.',
+        'Returns at larger scale may differ materially (capacity, liquidity, market impact). Past performance is not a reliable indicator of future results.',
+      ],
+    },
     founder: {
       label: 'The team',
       heading: 'Founder and portfolio manager',
@@ -186,6 +206,26 @@ const content = {
           title: 'Posicionamiento',
           desc: 'Posicionamiento de los fondos, ratios de cobertura de las subastas e interés abierto en opciones.',
         },
+      ],
+    },
+    performance: {
+      label: 'Historial · Pro forma',
+      heading: 'Rentabilidad mensual, julio de 2024 – octubre de 2026',
+      description:
+        'Resultado neto pro forma como porcentaje de una base de capital nocional fija de 250.000 €, sin capitalización. 17 de los 28 meses naturales fueron positivos. El mejor mes fue +19,1 % (mayo de 2025) y el peor, −14,8 % (enero de 2026).',
+      years: [
+        { value: '+10,9 %', label: '2024 (desde julio)' },
+        { value: '+58,0 %', label: '2025' },
+        { value: '+31,3 %', label: '2026 (a 30 oct.)' },
+      ],
+      chartLabel: 'Rentabilidad mensual pro forma, %',
+      chartAria:
+        'Gráfico de barras de la rentabilidad mensual pro forma de julio de 2024 a octubre de 2026. 17 de 28 meses fueron positivos; el mejor mes fue +19,1 % en mayo de 2025 y el peor, −14,8 % en enero de 2026.',
+      months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      notes: [
+        'Base del historial: segregación (carve-out) de las operaciones en futuros EUA de ICE Endex de una cuenta de trading propia, del 1 de julio de 2024 al 30 de octubre de 2026, conciliada con los extractos del bróker. No auditado ni verificado de forma independiente.',
+        'Datos pro forma, netos de costes de transacción (comisiones de ejecución) y brutos de comisiones de gestión y de éxito. Las rentabilidades se calculan sobre una base de capital nocional fija de 250.000 €, sin capitalización, y sin suscripciones, reembolsos ni ingresos por intereses.',
+        'Los resultados a mayor escala pueden diferir de forma significativa (capacidad, liquidez, impacto en el mercado). La rentabilidad pasada no es un indicador fiable de resultados futuros.',
       ],
     },
     founder: {
