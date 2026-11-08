@@ -24,16 +24,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* The embed host is inset:0. Lift it above the PageSense cookie bar so the
-   call control and the bar's Accept/Deny actions both stay usable.
-   :host sets inset, so bottom needs !important to win. */
+/* Official placement is top-right. The host is position:fixed; inset:0, and
+   :host wins over a normal top rule, so this needs !important. The offset
+   clears the fixed navbar (h-20) so the launcher does not cover the menu,
+   language switch, or booking link. */
 elevenlabs-convai {
-  bottom: 4.5rem !important;
+  top: 5.75rem !important;
 }
 
 @media (max-width: 767px) {
   elevenlabs-convai {
-    bottom: 8.5rem !important;
+    /* The full launcher is wider than the phone column, so a corner placement
+       covers the heading and the consultation button. Keep it on the right,
+       under those controls. Desktop stays at the top. */
+    top: 30.25rem !important;
   }
 }
 

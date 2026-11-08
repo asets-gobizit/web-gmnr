@@ -18,12 +18,19 @@ export const CONVAI_SCRIPT_ID = 'elevenlabs-convai-embed'
 export const MARIA_ORB_COLOR_1 = '#2792dc'
 export const MARIA_ORB_COLOR_2 = '#9ce6e6'
 
+// The embed attribute wins over the fetched agent widget config. The public
+// config is already top-right; this attribute is what the page actually renders.
+export const MARIA_PLACEMENT = 'top-right'
+
+// Exact heading requested for both languages. No separate Spanish label.
+export const MARIA_MAIN_LABEL = 'Talk to us today'
+
 // Widget UI strings. The embed does not translate these from the site language;
 // language presets on the agent supply the greeting and the terms body.
 // "Agree" / "Aceptar" match the verbs already used in those terms.
 const TEXT = {
   en: {
-    main_label: 'Talk to Maria',
+    main_label: MARIA_MAIN_LABEL,
     start_call: 'Call Maria',
     start_chat: 'Message Maria',
     end_call: 'End call',
@@ -39,7 +46,7 @@ const TEXT = {
     input_placeholder: 'Send a message...',
   },
   es: {
-    main_label: 'Habla con María',
+    main_label: MARIA_MAIN_LABEL,
     start_call: 'Llamar a María',
     start_chat: 'Escribir a María',
     end_call: 'Finalizar llamada',
@@ -79,7 +86,7 @@ export function mariaWidgetAttributes(language) {
     'agent-id': MARIA_AGENT_ID,
     language: lang,
     'override-language': lang,
-    placement: 'bottom-right',
+    placement: MARIA_PLACEMENT,
     'avatar-orb-color-1': MARIA_ORB_COLOR_1,
     'avatar-orb-color-2': MARIA_ORB_COLOR_2,
     'text-input': 'false',
