@@ -43,19 +43,14 @@ describe('MariaWidget server render', () => {
     assert.equal(spanish.includes('Aceptar'), true)
   })
 
-  it('renders one tappable Guy number and does not dial by itself', () => {
-    for (const [pathname, label] of [
-      ['/', 'Call +972 50 252 1213'],
-      ['/es/', 'Llamar al +972 50 252 1213'],
-    ]) {
+  it('does not add a phone link beside the launcher', () => {
+    for (const pathname of ['/', '/es/']) {
       const html = renderAt(pathname)
-      const links = html.match(/<a[^>]*href="tel:\+972502521213"[^>]*>[^<]*<\/a>/g) || []
-      assert.equal(links.length, 1)
-      assert.equal(links[0].includes(`>${label}<`), true)
-      assert.equal(links[0].includes('target='), false)
-      assert.equal(links[0].includes('onclick'), false)
-      assert.equal(html.includes('href="tel:+972502521213"'), true)
-      assert.equal(html.includes('markdown-link-allowed-hosts'), false)
+      assert.equal(html.includes('tel:+972502521213'), false)
+      assert.equal(html.includes('guy-direct-call'), false)
+      assert.equal(html.includes('Call +972 50 252 1213'), false)
+      assert.equal(html.includes('Llamar al +972 50 252 1213'), false)
+      assert.equal(html.match(/<elevenlabs-convai/g).length, 1)
     }
   })
 })
