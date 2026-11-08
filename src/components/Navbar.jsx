@@ -4,6 +4,80 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './Logo'
 
+/** Flag of England: St George's Cross, 5:3, cross one fifth of the hoist. */
+function EnglandFlag({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 25 15"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="25" height="15" fill="#FFFFFF" />
+      <rect x="11" width="3" height="15" fill="#C8102E" />
+      <rect y="6" width="25" height="3" fill="#C8102E" />
+    </svg>
+  )
+}
+
+/** Flag of Spain: 2:3, red–yellow–red bands with the yellow band twice each red band. */
+function SpainFlag({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 90 60"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="90" height="60" fill="#AA151B" />
+      <rect y="15" width="90" height="30" fill="#F1BF00" />
+    </svg>
+  )
+}
+
+const LANGUAGES = [
+  { id: 'en', short: 'EN', full: 'English', flagClass: 'h-[14px] w-[23px]' },
+  { id: 'es', short: 'ES', full: 'Español', flagClass: 'h-[14px] w-[21px]' },
+]
+
+function LanguageSwitcher({ lang, onSelect, variant }) {
+  const compact = variant === 'desktop'
+
+  return (
+    <div
+      role="group"
+      aria-label={lang === 'es' ? 'Idioma' : 'Language'}
+      className={compact ? 'flex shrink-0 items-stretch border border-white/15' : 'flex flex-col items-start gap-2'}
+    >
+      {LANGUAGES.map(({ id, short, full, flagClass }) => {
+        const active = lang === id
+        const flagClassName = `block shrink-0 shadow-[0_0_0_1px_rgba(255,255,255,0.45)] ${flagClass}`
+        return (
+          <button
+            key={id}
+            type="button"
+            lang={id}
+            aria-pressed={active}
+            aria-label={full}
+            title={full}
+            onClick={() => onSelect(id)}
+            className={`flex items-center gap-1.5 font-semibold tracking-widest uppercase cursor-pointer transition-colors duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+              compact
+                ? `px-2 py-1.5 text-xs border-r border-white/15 last:border-r-0 ${active ? 'text-gold bg-white/10' : 'text-white/80 hover:text-gold hover:bg-white/5'}`
+                : `px-3 py-2 text-xs border border-white/15 ${active ? 'text-gold border-gold/40 bg-white/10' : 'text-white/80 hover:text-gold hover:border-gold/40'}`
+            }`}
+          >
+            {id === 'en' ? <EnglandFlag className={flagClassName} /> : <SpainFlag className={flagClassName} />}
+            <span>{compact ? short : `${short} \u2014 ${full}`}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -100,8 +174,8 @@ export default function Navbar() {
           <Logo size="sm" variant="light" />
         </button>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10" aria-label="Main navigation">
+        {/* Desktop nav. Item gap is slightly tighter so both flags fit without squashing the logo. */}
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {links.map((link) => (
             <button
               key={link.section}
@@ -138,13 +212,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Language switcher */}
-          <button
-            onClick={switchLanguage}
-            className="text-white/50 text-xs font-semibold tracking-widest uppercase hover:text-gold transition-colors duration-300 cursor-pointer border border-white/15 px-3 py-1.5 hover:border-gold/40"
-          >
-            {lang === 'en' ? 'ES' : 'EN'}
-          </button>
+          <LanguageSwitcher lang={lang} variant="desktop" onSelect={(next) => { if (next !== lang) switchLanguage() }} />
 
           {!isCarbonEts && (
             <a
@@ -180,13 +248,14 @@ export default function Navbar() {
             className="md:hidden bg-navy border-t border-white/10 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
-              {/* Language switcher mobile */}
-              <button
-                onClick={() => { switchLanguage(); setMobileOpen(false) }}
-                className="self-start text-white/50 text-xs font-semibold tracking-widest uppercase border border-white/15 px-3 py-1.5 hover:text-gold hover:border-gold/40 transition-colors cursor-pointer"
-              >
-                {lang === 'en' ? 'ES \u2014 Espa\u00F1ol' : 'EN \u2014 English'}
-              </button>
+              <LanguageSwitcher
+                lang={lang}
+                variant="mobile"
+                onSelect={(next) => {
+                  if (next !== lang) switchLanguage()
+                  setMobileOpen(false)
+                }}
+              />
               <div className="border-t border-white/10 my-1" />
 
               {/* Projects section */}
