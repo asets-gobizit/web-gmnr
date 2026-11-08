@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.gmnrconsultants.com/sitemap.xml
+Sitemap: https://gmnrconsultants.com/sitemap.xml
