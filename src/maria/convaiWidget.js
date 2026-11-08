@@ -25,6 +25,20 @@ export const MARIA_PLACEMENT = 'top-right'
 // Exact heading requested for both languages. No separate Spanish label.
 export const MARIA_MAIN_LABEL = 'Talk to us today'
 
+// Guy's direct number. The widget markdown renderer cannot make tel: links
+// tappable: rehype-sanitize only allows http, https, irc, ircs, mailto, and
+// xmpp on href, and markdown-link-allowed-hosts only expands to http(s).
+export const GUY_PHONE_HREF = 'tel:+972502521213'
+
+export function guyPhoneLink(language) {
+  return {
+    href: GUY_PHONE_HREF,
+    label: language === 'es'
+      ? 'Llamar al +972 50 252 1213'
+      : 'Call +972 50 252 1213',
+  }
+}
+
 // Widget UI strings. The embed does not translate these from the site language;
 // language presets on the agent supply the greeting and the terms body.
 // "Agree" / "Aceptar" match the verbs already used in those terms.

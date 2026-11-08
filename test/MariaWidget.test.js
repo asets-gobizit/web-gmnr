@@ -42,4 +42,20 @@ describe('MariaWidget server render', () => {
     assert.equal(spanish.includes('Llamar a María'), true)
     assert.equal(spanish.includes('Aceptar'), true)
   })
+
+  it('renders one tappable Guy number and does not dial by itself', () => {
+    for (const [pathname, label] of [
+      ['/', 'Call +972 50 252 1213'],
+      ['/es/', 'Llamar al +972 50 252 1213'],
+    ]) {
+      const html = renderAt(pathname)
+      const links = html.match(/<a[^>]*href="tel:\+972502521213"[^>]*>[^<]*<\/a>/g) || []
+      assert.equal(links.length, 1)
+      assert.equal(links[0].includes(`>${label}<`), true)
+      assert.equal(links[0].includes('target='), false)
+      assert.equal(links[0].includes('onclick'), false)
+      assert.equal(html.includes('href="tel:+972502521213"'), true)
+      assert.equal(html.includes('markdown-link-allowed-hosts'), false)
+    }
+  })
 })
