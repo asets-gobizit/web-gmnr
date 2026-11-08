@@ -41,38 +41,6 @@ elevenlabs-convai {
   }
 }
 
-/* Direct line to Guy. A normal link: nothing dials until the visitor taps it.
-   It sits under the launcher so it does not cover the nav or the widget. */
-.guy-direct-call {
-  position: fixed;
-  z-index: 41;
-  right: 2rem;
-  top: 15rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  background: #fff;
-  color: #1a2332;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-decoration: none;
-  box-shadow: 0 8px 24px rgba(17, 25, 35, 0.18);
-}
-
-.guy-direct-call:hover,
-.guy-direct-call:focus-visible {
-  color: #1a2332;
-  outline: 2px solid #c8a250;
-  outline-offset: 2px;
-}
-
-@media (max-width: 767px) {
-  .guy-direct-call {
-    top: 39.5rem;
-    right: 1.25rem;
-  }
-}
-
 ::selection {
   background: var(--color-gold);
   color: var(--color-navy);
