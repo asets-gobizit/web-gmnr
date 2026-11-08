@@ -1,22 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import Logo from './Logo'
 
-/** Flag of England: St George's Cross, 5:3, cross one fifth of the hoist. */
-function EnglandFlag({ className }) {
+/** Union Jack, the flag of the United Kingdom. */
+function UnitedKingdomFlag({ className }) {
+  const saltireId = `uk-saltire-${useId().replace(/:/g, '')}`
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 25 15"
+      viewBox="0 0 60 30"
       className={className}
       aria-hidden="true"
       focusable="false"
     >
-      <rect width="25" height="15" fill="#FFFFFF" />
-      <rect x="11" width="3" height="15" fill="#C8102E" />
-      <rect y="6" width="25" height="3" fill="#C8102E" />
+      <clipPath id={saltireId}>
+        <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+      </clipPath>
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" clipPath={`url(#${saltireId})`} />
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
     </svg>
   )
 }
@@ -38,7 +44,7 @@ function SpainFlag({ className }) {
 }
 
 const LANGUAGES = [
-  { id: 'en', short: 'EN', full: 'English', flagClass: 'h-[14px] w-[23px]' },
+  { id: 'en', short: 'EN', full: 'English', flagClass: 'h-[14px] w-[28px]' },
   { id: 'es', short: 'ES', full: 'Español', flagClass: 'h-[14px] w-[21px]' },
 ]
 
@@ -69,7 +75,7 @@ function LanguageSwitcher({ lang, onSelect, variant }) {
                 : `px-3 py-2 text-xs border border-white/15 ${active ? 'text-gold border-gold/40 bg-white/10' : 'text-white/80 hover:text-gold hover:border-gold/40'}`
             }`}
           >
-            {id === 'en' ? <EnglandFlag className={flagClassName} /> : <SpainFlag className={flagClassName} />}
+            {id === 'en' ? <UnitedKingdomFlag className={flagClassName} /> : <SpainFlag className={flagClassName} />}
             <span>{compact ? short : `${short} \u2014 ${full}`}</span>
           </button>
         )
