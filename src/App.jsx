@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import BlogPost from './pages/BlogPost'
 import CarbonEts from './pages/CarbonEts'
 import RenewableEnergy from './pages/RenewableEnergy'
+import CarbonAlphaFund from './pages/CarbonAlphaFund'
 import MariaWidget from './components/MariaWidget'
 
 function HomePage() {
@@ -41,6 +42,7 @@ function AppLayout() {
             <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="projects/carbon-ets" element={<CarbonEts />} />
             <Route path="projects/renewable-energy" element={<RenewableEnergy />} />
+            <Route path="projects/carbon-alpha-fund" element={<CarbonAlphaFund />} />
           </Routes>
         </main>
         <Footer />
