@@ -10,6 +10,7 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import en from '../src/i18n/en.js'
 import es from '../src/i18n/es.js'
+import carbonAlphaFund from '../src/i18n/carbonAlphaFund.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = path.join(root, 'dist')
@@ -53,7 +54,14 @@ const pages = [
       es: { title: `${es.renewableEnergy.hero.heading} ${es.renewableEnergy.hero.headingAccent} | ${SUFFIX}`, description: es.renewableEnergy.hero.description },
     },
   },
-  ...en.blog.posts.map((post) => {
+    {
+    path: '/projects/carbon-alpha-fund', lastmod: today, changefreq: 'monthly', priority: '0.8',
+    meta: {
+      en: { title: `${carbonAlphaFund.en.meta.title} | ${SUFFIX}`, description: carbonAlphaFund.en.meta.description },
+      es: { title: `${carbonAlphaFund.es.meta.title} | ${SUFFIX}`, description: carbonAlphaFund.es.meta.description },
+    },
+  },
+...en.blog.posts.map((post) => {
     const esPost = es.blog.posts.find((p) => p.slug === post.slug) || post
     return {
       path: `/blog/${post.slug}`, lastmod: isoDate(post.date) || today, changefreq: 'yearly', priority: '0.7',
