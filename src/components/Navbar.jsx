@@ -1,4 +1,4 @@
-import { useState, useEffect, useId } from 'react'
+import { useState, useEffect, useId, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -48,38 +48,136 @@ const LANGUAGES = [
   { id: 'es', short: 'ES', full: 'Español', flagClass: 'h-[14px] w-[21px]' },
 ]
 
+function LanguageFlag({ id, className }) {
+  if (id === 'en') return <UnitedKingdomFlag className={className} />
+  return <SpainFlag className={className} />
+}
+
 function LanguageSwitcher({ lang, onSelect, variant }) {
-  const compact = variant === 'desktop'
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+  const buttonRef = useRef(null)
+  const optionRefs = useRef([])
+  const listId = useId()
+  const desktop = variant === 'desktop'
+  const current = LANGUAGES.find((item) => item.id === lang) || LANGUAGES[0]
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onPointer = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false)
+    }
+    const onKey = (event) => {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      setOpen(false)
+      buttonRef.current?.focus()
+    }
+    document.addEventListener('mousedown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const index = Math.max(0, LANGUAGES.findIndex((item) => item.id === lang))
+    optionRefs.current[index]?.focus()
+  }, [open, lang])
+
+  const choose = (id) => {
+    setOpen(false)
+    buttonRef.current?.focus()
+    if (id !== lang) onSelect(id)
+  }
+
+  const moveFocus = (delta) => {
+    const items = optionRefs.current.filter(Boolean)
+    const currentIndex = items.indexOf(document.activeElement)
+    const next = items[(currentIndex + delta + items.length) % items.length]
+    next?.focus()
+  }
 
   return (
     <div
-      role="group"
-      aria-label={lang === 'es' ? 'Idioma' : 'Language'}
-      className={compact ? 'flex shrink-0 items-stretch border border-white/15' : 'flex flex-col items-start gap-2'}
+      ref={rootRef}
+      className={desktop ? 'relative shrink-0' : 'relative self-start'}
+      onBlur={(event) => {
+        if (!rootRef.current?.contains(event.relatedTarget)) setOpen(false)
+      }}
     >
-      {LANGUAGES.map(({ id, short, full, flagClass }) => {
-        const active = lang === id
-        const flagClassName = `block shrink-0 shadow-[0_0_0_1px_rgba(255,255,255,0.45)] ${flagClass}`
-        return (
-          <button
-            key={id}
-            type="button"
-            lang={id}
-            aria-pressed={active}
-            aria-label={full}
-            title={full}
-            onClick={() => onSelect(id)}
-            className={`flex items-center gap-1.5 font-semibold tracking-widest uppercase cursor-pointer transition-colors duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gold ${
-              compact
-                ? `px-2 py-1.5 text-xs border-r border-white/15 last:border-r-0 ${active ? 'text-gold bg-white/10' : 'text-white/80 hover:text-gold hover:bg-white/5'}`
-                : `px-3 py-2 text-xs border border-white/15 ${active ? 'text-gold border-gold/40 bg-white/10' : 'text-white/80 hover:text-gold hover:border-gold/40'}`
-            }`}
-          >
-            {id === 'en' ? <UnitedKingdomFlag className={flagClassName} /> : <SpainFlag className={flagClassName} />}
-            <span>{compact ? short : `${short} \u2014 ${full}`}</span>
-          </button>
-        )
-      })}
+      <button
+        ref={buttonRef}
+        type="button"
+        lang={current.id}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-label={current.full}
+        onClick={() => setOpen((value) => !value)}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault()
+            setOpen(true)
+          }
+        }}
+        className={`flex items-center gap-1.5 border px-2 py-1.5 text-xs font-semibold tracking-widest uppercase cursor-pointer transition-colors duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+          open ? 'border-gold/40 text-gold' : 'border-white/15 text-white/80 hover:border-gold/40 hover:text-gold'
+        }`}
+      >
+        <LanguageFlag id={current.id} className={`block shrink-0 shadow-[0_0_0_1px_rgba(255,255,255,0.45)] ${current.flagClass}`} />
+        <span>{current.short}</span>
+        <svg className={`h-3 w-3 transition-transform ${open ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          id={listId}
+          role="listbox"
+          aria-label={lang === 'es' ? 'Idioma' : 'Language'}
+          className={desktop
+            ? 'absolute left-0 top-full z-50 mt-2 min-w-[11.5rem] border border-white/15 bg-navy py-1 shadow-xl'
+            : 'mt-2 min-w-[11.5rem] border border-white/15 bg-navy py-1'}
+        >
+          {LANGUAGES.map((item, index) => {
+            const selected = item.id === lang
+            return (
+              <button
+                key={item.id}
+                ref={(node) => { optionRefs.current[index] = node }}
+                type="button"
+                role="option"
+                lang={item.id}
+                tabIndex={-1}
+                aria-selected={selected}
+                onClick={() => choose(item.id)}
+                onKeyDown={(event) => {
+                  if (event.key === 'ArrowDown') {
+                    event.preventDefault()
+                    moveFocus(1)
+                  } else if (event.key === 'ArrowUp') {
+                    event.preventDefault()
+                    moveFocus(-1)
+                  } else if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    choose(item.id)
+                  }
+                }}
+                className={`flex w-full items-center gap-2 whitespace-nowrap px-3 py-2 text-left text-xs cursor-pointer transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:-outline-offset-1 focus-visible:outline-gold ${
+                  selected ? 'bg-white/10 text-gold' : 'text-white/80 hover:bg-white/5 hover:text-gold'
+                }`}
+              >
+                <LanguageFlag id={item.id} className={`block shrink-0 shadow-[0_0_0_1px_rgba(255,255,255,0.45)] ${item.flagClass}`} />
+                <span className="font-semibold tracking-widest uppercase">{item.short}</span>
+                <span className="font-medium normal-case tracking-normal">{item.full}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
