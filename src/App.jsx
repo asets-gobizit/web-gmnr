@@ -48,13 +48,21 @@ function AppLayout() {
   )
 }
 
+// Route table, shared by the browser (BrowserRouter) and the build-time
+// pre-renderer (StaticRouter in entry-server.jsx).
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/es/*" element={<AppLayout />} />
+      <Route path="/*" element={<AppLayout />} />
+    </Routes>
+  )
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/es/*" element={<AppLayout />} />
-        <Route path="/*" element={<AppLayout />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   )
 }
