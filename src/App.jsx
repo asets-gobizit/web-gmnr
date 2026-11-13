@@ -14,7 +14,7 @@ import BlogPost from './pages/BlogPost'
 import CarbonEts from './pages/CarbonEts'
 import RenewableEnergy from './pages/RenewableEnergy'
 import CarbonAlphaFund from './pages/CarbonAlphaFund'
-import MariaWidget from './components/MariaWidget'
+import EvaWidget from './components/EvaWidget'
 
 function HomePage() {
   return (
@@ -60,7 +60,7 @@ export function AppRoutes() {
         <Route path="/es/*" element={<AppLayout />} />
         <Route path="/*" element={<AppLayout />} />
       </Routes>
-      <MariaWidget />
+      <EvaWidget />
     </>
   )
 }

@@ -24,23 +24,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Official placement is top-right. The host is position:fixed; inset:0, and
-   :host wins over a normal top rule, so this needs !important. The offset
-   clears the fixed navbar (h-20) so the launcher does not cover the menu,
-   language switch, or booking link. */
-elevenlabs-convai {
-  top: 5.75rem !important;
-}
-
-@media (max-width: 767px) {
-  elevenlabs-convai {
-    /* The full launcher is wider than the phone column, so a corner placement
-       covers the heading and the consultation button. Keep it on the right,
-       under those controls. Desktop stays at the top. */
-    top: 30.25rem !important;
-  }
-}
-
 ::selection {
   background: var(--color-gold);
   color: var(--color-navy);
