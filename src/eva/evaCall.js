@@ -1,4 +1,5 @@
-// Eva — browser voice call with the GMnR ElevenLabs agent.
+// Maria ("Eva" internally) — browser voice call with the GMnR ElevenLabs agent.
+// The agent introduces herself as Maria, so every visible string says Maria.
 //
 // This replaces the official <elevenlabs-convai> embed with the same live-call
 // panel used on gobizit.ai (timer, transcript, download, mute, end call), so
@@ -22,18 +23,18 @@ export const EVA_BOOKING_URL = {
 
 const TEXT = {
   en: {
-    launcher: 'Talk with Eva',
+    launcher: 'Talk with Maria',
     launcherSub: 'AI assistant · in your browser',
-    title: 'Live call with Eva',
+    title: 'Live call with Maria',
     connecting: 'Connecting…',
     listening: 'Listening — go ahead and talk',
-    speaking: 'Eva is speaking…',
-    muted: "Muted — Eva can't hear you",
+    speaking: 'Maria is speaking…',
+    muted: "Muted — Maria can't hear you",
     ended: 'Call ended',
-    endedThanks: 'Call ended — thanks for talking to Eva!',
-    hint: 'Speak naturally — Eva is listening. The transcript appears here.',
+    endedThanks: 'Call ended — thanks for talking to Maria!',
+    hint: 'Speak naturally — Maria is listening. The transcript appears here.',
     you: 'You',
-    agent: 'Eva',
+    agent: 'Maria',
     mute: 'Mute',
     unmute: 'Unmute',
     endCall: 'End call',
@@ -46,18 +47,18 @@ const TEXT = {
     language: 'English',
   },
   es: {
-    launcher: 'Habla con Eva',
+    launcher: 'Habla con María',
     launcherSub: 'Asistente de IA · en tu navegador',
-    title: 'Llamada en directo con Eva',
+    title: 'Llamada en directo con María',
     connecting: 'Conectando…',
     listening: 'Escuchando — puedes hablar',
-    speaking: 'Eva está hablando…',
-    muted: 'Silenciado — Eva no puede oírte',
+    speaking: 'María está hablando…',
+    muted: 'Silenciado — María no puede oírte',
     ended: 'Llamada finalizada',
-    endedThanks: '¡Llamada finalizada — gracias por hablar con Eva!',
-    hint: 'Habla con naturalidad — Eva te escucha. La transcripción aparece aquí.',
+    endedThanks: '¡Llamada finalizada — gracias por hablar con María!',
+    hint: 'Habla con naturalidad — María te escucha. La transcripción aparece aquí.',
     you: 'Tú',
-    agent: 'Eva',
+    agent: 'María',
     mute: 'Silenciar',
     unmute: 'Activar micro',
     endCall: 'Finalizar llamada',
@@ -112,7 +113,7 @@ export function transcriptFile(messages, language) {
   }
   return {
     text: lines.join('\n'),
-    name: `eva-call-${now.toISOString().slice(0, 16).replace(/[:T]/g, '-')}.txt`,
+    name: `maria-call-${now.toISOString().slice(0, 16).replace(/[:T]/g, '-')}.txt`,
   }
 }
 

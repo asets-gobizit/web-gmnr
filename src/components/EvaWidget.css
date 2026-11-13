@@ -1,6 +1,6 @@
-/* Eva live-call widget — GMnR navy/gold theme.
-   Same layout as the GoBizIT call panel; colours come from the site tokens in
-   src/index.css (navy #1a2332 / navy-dark #111923 / gold #c8a250). */
+/* Maria live-call widget — GMnR navy/gold theme.
+   Same layout and motion as the GoBizIT call button and panel; colours come
+   from the site tokens in src/index.css (navy #1a2332 / #111923, gold #c8a250). */
 
 .eva-launcher,
 .eva-call {
@@ -18,8 +18,8 @@
 /* ---------- launcher ---------- */
 .eva-launcher {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  left: 24px;
+  top: 5.75rem; /* clears the fixed navbar (h-20) */
   z-index: 99997;
   display: inline-flex;
   align-items: center;
@@ -30,13 +30,14 @@
   cursor: pointer;
   color: var(--eva-ink);
   background: linear-gradient(135deg, var(--eva-navy-soft), var(--eva-navy));
-  box-shadow: 0 18px 40px rgba(17, 25, 35, 0.35);
+  box-shadow: 0 10px 34px rgba(17, 25, 35, 0.4), 0 0 0 6px rgba(200, 162, 80, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: evaGlow 2.8s ease-in-out infinite;
 }
 
 .eva-launcher:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 50px rgba(17, 25, 35, 0.45);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 46px rgba(17, 25, 35, 0.5), 0 0 0 8px rgba(200, 162, 80, 0.18);
 }
 
 .eva-launcher--hidden {
@@ -44,6 +45,7 @@
 }
 
 .eva-launcher__icon {
+  position: relative;
   width: 38px;
   height: 38px;
   flex: none;
@@ -54,10 +56,22 @@
   background: linear-gradient(135deg, var(--eva-gold-light), var(--eva-gold-dark));
 }
 
+/* Expanding ring around the handset, same idea as the GoBizIT call button. */
+.eva-launcher__icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(200, 162, 80, 0.75);
+  animation: evaCallRing 2.4s ease-out infinite;
+}
+
 .eva-launcher__icon svg {
   width: 17px;
   height: 17px;
   fill: var(--eva-navy);
+  transform-origin: 50% 50%;
+  animation: evaHandset 2.4s ease-in-out infinite;
 }
 
 .eva-launcher__label {
@@ -81,13 +95,13 @@
 /* ---------- call panel ---------- */
 .eva-call {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  left: 24px;
+  top: 5.75rem;
   z-index: 99998;
   width: 400px;
   max-width: calc(100vw - 32px);
   height: 560px;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 7.5rem);
   display: none;
   flex-direction: column;
   overflow: hidden;
@@ -339,6 +353,23 @@
   to { opacity: 0; transform: scale(1.35); }
 }
 
+@keyframes evaHandset {
+  0%, 52%, 100% { transform: rotate(0); }
+  4%, 12%, 20%, 28% { transform: rotate(-16deg); }
+  8%, 16%, 24%, 32% { transform: rotate(16deg); }
+  36% { transform: rotate(0); }
+}
+
+@keyframes evaCallRing {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(1.9); opacity: 0; }
+}
+
+@keyframes evaGlow {
+  0%, 100% { box-shadow: 0 10px 34px rgba(17, 25, 35, 0.4), 0 0 0 6px rgba(200, 162, 80, 0.1); }
+  50% { box-shadow: 0 14px 44px rgba(17, 25, 35, 0.45), 0 0 26px 6px rgba(200, 162, 80, 0.3); }
+}
+
 @keyframes evaPulse {
   0% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
   70% { box-shadow: 0 0 0 6px transparent; opacity: 0.75; }
@@ -346,6 +377,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .eva-launcher,
+  .eva-launcher__icon::after,
+  .eva-launcher__icon svg,
   .eva-call,
   .eva-msg,
   .eva-dot,
@@ -356,13 +390,14 @@
 
 @media (max-width: 767px) {
   .eva-launcher {
-    right: 12px;
-    bottom: 16px;
+    left: 12px;
+    top: 5rem;
     padding: 10px 16px 10px 12px;
   }
 
   .eva-call {
-    right: 0;
+    left: 0;
+    top: auto;
     bottom: 0;
     width: 100vw;
     max-width: 100vw;
