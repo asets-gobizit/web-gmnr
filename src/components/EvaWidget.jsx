@@ -13,7 +13,7 @@ import {
 } from '../eva/evaCall.js'
 import './EvaWidget.css'
 
-// Floating launcher + live-call panel for Eva (ElevenLabs voice agent).
+// Floating launcher + live-call panel for Maria (ElevenLabs voice agent).
 // Nothing loads or connects until the visitor clicks the launcher.
 export default function EvaWidget() {
   const { pathname } = useLocation()
@@ -233,7 +233,7 @@ export default function EvaWidget() {
         aria-hidden={open ? undefined : 'true'}
       >
         <div className="eva-call__head">
-          <span className="eva-call__avatar" aria-hidden="true">E</span>
+          <span className="eva-call__avatar" aria-hidden="true">M</span>
           <span className="eva-call__who">
             <b>{t.title}</b>
             <small className={error ? 'is-error' : undefined}>
