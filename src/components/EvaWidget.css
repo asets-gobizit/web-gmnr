@@ -18,8 +18,8 @@
 /* ---------- launcher ---------- */
 .eva-launcher {
   position: fixed;
-  left: 24px;
-  top: 5.75rem; /* clears the fixed navbar (h-20) */
+  right: 24px;
+  top: 5.75rem; /* sits under the navbar's Book a Call button */
   z-index: 99997;
   display: inline-flex;
   align-items: center;
@@ -95,7 +95,7 @@
 /* ---------- call panel ---------- */
 .eva-call {
   position: fixed;
-  left: 24px;
+  right: 24px;
   top: 5.75rem;
   z-index: 99998;
   width: 400px;
@@ -390,13 +390,13 @@
 
 @media (max-width: 767px) {
   .eva-launcher {
-    left: 12px;
+    right: 12px;
     top: 5rem;
     padding: 10px 16px 10px 12px;
   }
 
   .eva-call {
-    left: 0;
+    right: 0;
     top: auto;
     bottom: 0;
     width: 100vw;
